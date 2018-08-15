@@ -9,6 +9,9 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, 'client-spm/build')));
 
+// require('./mainServer/Routes/index')(app)
+
+
 app.use('*', express.static(path.join(__dirname, 'client-spm/build')));
 app.listen(config.PORT,() => {
     console.log('Server started on port 4000');
