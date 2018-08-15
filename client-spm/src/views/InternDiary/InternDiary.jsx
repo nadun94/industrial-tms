@@ -18,20 +18,16 @@ class TrainingInfo extends React.Component {
   };
 
   addRecord = event => {
-    var record = {
-      trainerName: this.state.trainerName,
-      trainingDesc: this.state.trainingDesc,
-      from: this.state.from,
-      to: this.state.to
-    };
+    var record = [
+      this.state.trainerName,
+      this.state.trainingDesc,
+      this.state.from,
+      this.state.to
+    ];
     this.state.records.push(record);
     this.setState({
-      records:this.state.records
-  });
-
-
-
-
+      records: this.state.records
+    });
 
     console.log(this.state.records);
   };
@@ -42,15 +38,19 @@ class TrainingInfo extends React.Component {
         {this.state.records.map((prop, key) => {
           return (
             <tr key={key}>
-              {
+              {prop.map((prop, key) => {
                 if (key === thead.length - 1)
                   return (
-                    <td key={key} className="text-right">
+                    <td key={key} className="text-left">
                       {prop}
                     </td>
                   );
                 return <td key={key}>{prop}</td>;
-              )}
+              })}
+
+              <td key="action">
+                <Button color="warning">Delete Record</Button>
+              </td>
             </tr>
           );
         })}
@@ -131,17 +131,23 @@ class TrainingInfo extends React.Component {
                   <Table responsive>
                     <thead className="text-primary">
                       <tr>
-                        <th key="trainerName" className="text-right">
+                        <th key="trainerName" className="text-middle">
                           Trainer Name
                         </th>
-                        <th key="trainingDesc" className="text-right">
+                        <th key="trainingDesc" className="text-middle">
                           Training Description
                         </th>
-                        <th key="from" className="text-right">
+                        <th key="from" className="text-middle">
                           Period [From]
                         </th>
-                        <th key="to" className="text-right">
+                        <th key="to" className="text-middle">
                           Period [to]
+                        </th>
+                        <th key="approval" className="text-middle">
+                          Supervisor Approval
+                        </th>
+                        <th key="actionField" className="text-middle">
+                          Actions
                         </th>
                       </tr>
                     </thead>

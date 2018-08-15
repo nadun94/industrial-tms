@@ -15,6 +15,65 @@ import Button from "components/CustomButton/CustomButton.jsx";
 import { thead, tbody } from "variables/general";
 
 class MonthlyDiary extends React.Component {
+  state = {
+    month: "",
+    summery: "",
+    
+    records: []
+  };
+
+  addRecord = event => {
+    var record = [
+      "Not Assigned",
+      this.state.month,
+      this.state.summery,
+      "Not Approved"
+    ];
+    this.state.records.push(record);
+    this.setState({
+      records: this.state.records
+    });
+
+    console.log(this.state.records);
+  };
+
+  createTable = () => {
+    var table = (
+      <tbody>
+        {this.state.records.map((prop, key) => {
+          return (
+            <tr key={key}>
+              {prop.map((prop, key) => {
+                if (key === thead.length - 1)
+                  return (
+                    <td key={key} className="text-left">
+                      {prop}
+                    </td>
+                  );
+                return <td key={key}>{prop}</td>;
+              })}
+
+              <td key="action">
+                <Button color="warning">Delete Record</Button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    );
+
+    console.log("table");
+
+    return table;
+  };
+
+  handleChange = event => {
+    console.log([event.target.name] + " " + event.target.value);
+
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+
   render() {
     return (
       <div>
@@ -37,7 +96,9 @@ class MonthlyDiary extends React.Component {
                         {
                           label: "Month",
                           inputProps: {
-                            type: "month"
+                            type: "month",
+                            name:"month",
+                            onChange: this.handleChange
                           }
                          
                         }
@@ -54,50 +115,41 @@ class MonthlyDiary extends React.Component {
                            inputProps: {
                             type: "textarea",
                             rows: 5,
-                            placeholder: "Intern should maintain weekly entries at minium in this area, providing the summery of the task and the task duration."
+                            placeholder: "Intern should maintain weekly entries at minium in this area, providing the summery of the task and the task duration.",
+                            name: "summery",
+                            onChange: this.handleChange
                           }
                         }
                       ]}
                     />
 
-                     <Button color="success" pullRight>Add Record</Button>
+                     <Button color="success" pullRight onClick={this.addRecord}>Add Record</Button>
                      <div className="clearfix" />
                      <div className="clearfix" />
                      
-                   <Table responsive>
-                      <thead className="text-primary">
-                        <tr>
-                          {thead.map((prop, key) => {
-                            if (key === thead.length - 1)
-                              return (
-                                <th key={key} className="text-right">
-                                  {prop}
-                                </th>
-                              );
-                            return <th key={key}>{prop}</th>;
-                          })}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tbody.map((prop, key) => {
-                          return (
-                            <tr key={key}>
-                              {prop.data.map((prop, key) => {
-                                if (key === thead.length - 1)
-                                  return (
-                                    <td key={key} className="text-right">
-                                      {prop}
-                                    </td>
-                                  );
-                                return <td key={key}>{prop}</td>;
-                              })}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-
-                     
-                    </Table>
+                     <Table responsive>
+                    <thead className="text-primary">
+                      <tr>
+                        <th key="EntryID" className="text-middle">
+                          Entry Id
+                        </th>
+                        <th key="Month" className="text-middle">
+                          Month
+                        </th>
+                        <th key="summery" className="text-middle">
+                          Summery
+                        </th>
+                        <th key="status" className="text-middle">
+                          Supervisor Approval
+                        </th>
+                       
+                        <th key="actionField" className="text-middle">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                     {this.createTable()} 
+                  </Table>
                   </form>
                 </CardBody>
               </Card>
