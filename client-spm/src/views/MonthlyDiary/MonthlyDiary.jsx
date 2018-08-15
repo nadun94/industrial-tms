@@ -1,13 +1,7 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Row, Col, Table } from "reactstrap";
 
-import {
-  PanelHeader,
-  FormInputs,
-  CardAuthor,
-  CardSocials,
-  
-} from "components";
+import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "components";
 
 import userBackground from "assets/img/bg5.jpg";
 import userAvatar from "assets/img/mike.jpg";
@@ -18,7 +12,7 @@ class MonthlyDiary extends React.Component {
   state = {
     month: "",
     summery: "",
-    
+
     records: []
   };
 
@@ -27,7 +21,7 @@ class MonthlyDiary extends React.Component {
       "Not Assigned",
       this.state.month,
       this.state.summery,
-      "Not Approved"
+      "No Remarks"
     ];
     this.state.records.push(record);
     this.setState({
@@ -73,7 +67,6 @@ class MonthlyDiary extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-
   render() {
     return (
       <div>
@@ -87,69 +80,64 @@ class MonthlyDiary extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <form>
-                  <h5>
-                        Summery of the key tasks completed for the month of [Month/Year]
-                      </h5>
-                      <FormInputs
-                      ncols={["col-md-3 pr-1"]}
+                    <h5>
+                      Summery of the key tasks completed for the month of
+                      [Month/Year]
+                    </h5>
+                    <FormInputs
+                      ncols={["col-md-3 pr-1", "col-md-8 pr-1"]}
                       proprieties={[
                         {
                           label: "Month",
                           inputProps: {
                             type: "month",
-                            name:"month",
+                            name: "month",
                             onChange: this.handleChange
                           }
-                         
-                        }
-                    
-                      ]}
-                    />
-
-                     <FormInputs
-                      ncols={["col-md-6 pl-1"]}
-                      proprieties={[
-                       
+                        },
                         {
-                            label: "Summery",
-                           inputProps: {
-                            type: "textarea",
-                            rows: 5,
-                            placeholder: "Intern should maintain weekly entries at minium in this area, providing the summery of the task and the task duration.",
+                          label: "Remarks from supervisor",
+                          inputProps: {
+                            type: "text",
+                            placeholder:
+                              "Intern should maintain weekly entries at minium in this area, providing the summery of the task and the task duration.",
                             name: "summery",
+                            name: "remarks",
                             onChange: this.handleChange
                           }
                         }
                       ]}
                     />
 
-                     <Button color="success" pullRight onClick={this.addRecord}>Add Record</Button>
-                     <div className="clearfix" />
-                     <div className="clearfix" />
-                     
-                     <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th key="EntryID" className="text-middle">
-                          Entry Id
-                        </th>
-                        <th key="Month" className="text-middle">
-                          Month
-                        </th>
-                        <th key="summery" className="text-middle">
-                          Summery
-                        </th>
-                        <th key="status" className="text-middle">
-                          Supervisor Approval
-                        </th>
-                       
-                        <th key="actionField" className="text-middle">
-                          Actions
-                        </th>
-                      </tr>
-                    </thead>
-                     {this.createTable()} 
-                  </Table>
+                    <Button color="success" pullRight onClick={this.addRecord}>
+                      Add Record
+                    </Button>
+                    <div className="clearfix" />
+                    <div className="clearfix" />
+
+                    <Table responsive>
+                      <thead className="text-primary">
+                        <tr>
+                          <th key="EntryID" className="text-middle">
+                            Entry Id
+                          </th>
+                          <th key="Month" className="text-middle">
+                            Month
+                          </th>
+                          <th key="summery" className="text-middle">
+                            Summery
+                          </th>
+                          <th key="status" className="text-middle">
+                            Supervisor Remarks
+                          </th>
+
+                          <th key="actionField" className="text-middle">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      {this.createTable()}
+                    </Table>
                   </form>
                 </CardBody>
               </Card>

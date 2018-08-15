@@ -9,8 +9,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <PanelHeader
-          size="sm" />
+        <PanelHeader size="sm" />
         <div className="content">
           <Row>
             <Col xs={12} md={4}>
@@ -20,9 +19,7 @@ class Home extends React.Component {
                   <CardTitle tag="h4">Shipped Products</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <div className="chart-area">
-
-                  </div>
+                  <div className="chart-area" />
                 </CardBody>
               </Card>
             </Col>

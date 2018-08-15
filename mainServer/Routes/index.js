@@ -1,33 +1,43 @@
-module.exports = function(app){
-const config = require('../config.js');
-const mysql = require('mysql');
-const Sequelize = require('sequelize');   
-    // const Op = Sequelize.Op;
-const db = {};
+module.exports = function (app) {
+  const config = require('../config.js');
+  const mysql = require('mysql');
+  const Sequelize = require('sequelize');
+  const mongoose = require('mongoose');
+  const db = {};
 
-const sequelize = new Sequelize('itmsdb','root','7517',{
-  host: 'localhost',
-  dialect: 'mysql',
-  pool: {
-    max: 10,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }})
-sequelize.authenticate()
-  .then(() => {
-    console.log('Successfully connected to MYSQL')
-  })
-  .catch((err) => {
-    console.log('Error connecting to mysql', err)
-    process.exit(1);
-  })
-
-  //Auto ssh_disable_
-  // require('../Tasks/Automatic_ssh_disable/auto_ssh_controller')(app,Sequelize,sequelize,db)
+  const sequelize = new Sequelize(config.mysql.options)
+  sequelize.authenticate()
+    .then(() => {
+      console.log('Successfully connected to MYSQL')
+    })
+    .catch((err) => {
+      console.log('Error connecting to mysql', err)
+      process.exit(1);
+    })
 
 config.mysql.client = sequelize;
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+  //create user
+ 
+  require('../Controller/InternDiary/internalTrainingController')(app, Sequelize, sequelize, db)
+ 
+
+  //Connection to the mysql datatabase
+    // const Op = Sequelize.Op;
+
+  //IT16122192(rakshitha)employeeadd
+
+ 
+
+
+  //Connection to the Mogodb
+  
+mongoose.connect('mongodb://localhost:27017/internship', (err) => {
+  if (err) {
+      console.log('Error connecting to mongodb')
+  }
+  console.log('MongoDB connection successfull')
+})
 }

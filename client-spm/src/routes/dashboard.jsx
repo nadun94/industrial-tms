@@ -4,6 +4,7 @@ import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import Diary from "views/InternDiary/InternDiary.jsx";
 import MonthlyDiary from "views/MonthlyDiary/MonthlyDiary.jsx";
+import MonthlyDiaryRemarks from "views/InternDiaryRemarks/InternDiaryRemarks.jsx";
 var dashRoutes = [
   {
     path: "/home",
@@ -40,6 +41,12 @@ var dashRoutes = [
     name: "Monthly Diary",
     icon: "files_paper",
     component: MonthlyDiary
+  },
+  {
+    path: "/remarks-Diary",
+    name: "Monthly Diary Remarks",
+    icon: "files_paper",
+    component: MonthlyDiaryRemarks
   },
 
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
