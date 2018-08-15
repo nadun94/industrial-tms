@@ -1,5 +1,5 @@
-import Home from "views/Home/Home.jsx";
-import Icons from "views/Icons/Icons.jsx";
+import Home from "../views/Home/Home.jsx";
+import Icons from "../views/Icons/Icons.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 
@@ -29,6 +29,6 @@ var dashRoutes = [
     component: TableList
   },
 
-  { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
+  { redirect: true, path: "/", pathTo: "/home", name: "Home" }
 ];
 export default dashRoutes;

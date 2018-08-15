@@ -23,7 +23,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
                             })
                             .then((result, error) => {
                                 if (error) {
-                                    console.log("Error: ",error)
+                                    // console.log("Error: ",error)
                                     res.send(JSON.stringify({
                                         "Error_status": 500,
                                         "auth":false,
@@ -31,7 +31,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
                                         "user": null
                                     }))
                                 } else {
-                                    console.log("Date: ",result)
+                                    // console.log("Date: ",result)
                                     res.send(JSON.stringify({
                                         "Error_status": 200,
                                         "auth":true,
