@@ -21,8 +21,7 @@ db.sequelize = sequelize;
 
   //create user
   require('../Controller/Login/login')(app, Sequelize, sequelize, db)
-  //studentdetailsform1ys
-  require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
+  require('../Controller/StdReg/StdRegCont')(app, Sequelize, sequelize, db)
 
   //require formI5 controller
   require('./supervisor_formI5_route/supervisor_formI5_route')(app)
