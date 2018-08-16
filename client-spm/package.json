@@ -55,5 +55,10 @@
     "eslint-plugin-react": "^7.10.0",
     "prettier": "^1.13.7"
   },
+<<<<<<< HEAD
   "proxy": "http://localhost:4000"
+=======
+  "proxy":"http://localhost:4000"
+
+>>>>>>> 9980c6d33213a544794b3d1704d6b1746e883ed0
 }
