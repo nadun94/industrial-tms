@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, Radio } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
+
+import { stud_perfomance, wrk_hbts } from "../../variables/var_i5.jsx";
 class Supervisor_i5 extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +13,13 @@ class Supervisor_i5 extends React.Component {
       student: null,
       empName: "",
       supervisorName: "",
-      descrip_work_diff: ""
+      descrip_work_diff: "",
+      descrip_positive_pc: "",
+      descrip_pc_hep_pd: "",
+      descrip_effective_for_org_intern:'',
+      descrip_sugst_ip:'',
+      descrip_comnt_frm_org:'',
+      descrip_comnt_frm_org_fac_advsr:'',
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -90,7 +98,7 @@ class Supervisor_i5 extends React.Component {
           </Row>
           {/* ********************** Row two *********************** */}
           <Row>
-            <Col md={9} xs={12}>
+            <Col md={12} xs={12}>
               <Card>
                 <div className="card-content">
                   <CardHeader>
@@ -118,7 +126,7 @@ class Supervisor_i5 extends React.Component {
               </Card>
             </Col>
           </Row>
-          {/* ********************** Row Three *********************** */}
+          {/* ********************** Row Three - rdio  *********************** */}
           <Row>
             <Col md={12} xs={12}>
               <Card>
@@ -127,41 +135,333 @@ class Supervisor_i5 extends React.Component {
                     <h5 className="title">Performance of Student</h5>
                   </CardHeader>
                   <CardBody>
-                    <Form inline>
-
-                      <FormGroup tag="fieldset" inline>
-                      <legend>Radio Butto </legend>
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="radio" name="radio1" />{" "} Above Average
-                            </Label>
+                    {stud_perfomance.map((item, key) => {
+                      return (
+                        <Form inline>
+                          <Col xs="3">
+                            <h7>{item}</h7>
+                          </Col>
+                          <Col xs="auto">
+                            <Form inline>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Above Average"
+                                  />{" "}
+                                  Above Average
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Average"
+                                  />{" "}
+                                  Average
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Below Average"
+                                  />{" "}
+                                  Below Average
+                                </Label>
+                              </FormGroup>
+                            </Form>
+                          </Col>
+                          <Col sm="2" md={{ size: 4, offset: 1 }}>
+                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                              <Input
+                                type="text"
+                                name="comment"
+                                placeholder=" Comments, Examples"
+                                bsSize="large"
+                              />
+                            </FormGroup>
+                          </Col>
+                          <br />
+                        </Form>
+                      );
+                    })}
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row four *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">Work Habbits of Student</h5>
+                  </CardHeader>
+                  <CardBody>
+                    {wrk_hbts.map((item, key) => {
+                      return (
+                        <Form inline>
+                          <Col xs="3">
+                            <h7>{item}</h7>
+                          </Col>
+                          <Col xs="auto">
+                            <Form inline>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Above Average"
+                                  />{" "}
+                                  Above Average
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Average"
+                                  />{" "}
+                                  Average
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Below Average"
+                                  />{" "}
+                                  Below Average
+                                </Label>
+                              </FormGroup>
+                            </Form>
+                          </Col>
+                          <Col sm="2" md={{ size: 4, offset: 1 }}>
+                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                              <Input
+                                type="text"
+                                name="comment"
+                                placeholder=" Comments, Examples"
+                                bsSize="large"
+                              />
+                            </FormGroup>
+                          </Col>
+                          <br />
+                        </Form>
+                      );
+                    })}
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row Five *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                      List positive personal characteristics (Business Acumen,
+                      Vigor, Adaptability, Teamwork, Leadership, Confidence,
+                      etc.)
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form row>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_positive_pc"
+                              placeholder="Enter here"
+                            />
+                          </Col>
                         </FormGroup>
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="radio" name="radio1" /> {" "}Average
-                            </Label>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row six *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                      List personal characteristics that will help the student
+                      in his/her professional development
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form row>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_pc_hep_pd"
+                              placeholder="Enter here"
+                            />
+                          </Col>
                         </FormGroup>
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="radio" name="radio1" />{" "} Below Average
-
-                            </Label>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row seven *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                    Please suggest ways you feel we could make our program more meaningful to the student and you, the employer.
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form row>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_sugst_ip"
+                              placeholder="Enter here"
+                            />
+                          </Col>
                         </FormGroup>
-                      </FormGroup>
-                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label sm={2} className="mr-sm-2">
-                          Comments, Examples, Observations
-                          </Label>
-                        <Col sm={10}>
-                          <Input
-                            type="text"
-                            name="comment"
-                            placeholder="comment"
-                          />
-                        </Col>
-                      </FormGroup>
-
-                    </Form>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        
+          {/* ********************** Row Eight *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                    Please comment on the appropriateness of the student's academic training as it related to a position in your organization.
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form row>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_comnt_frm_org"
+                              placeholder="Enter here"
+                            />
+                          </Col>
+                        </FormGroup>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        {/* ********************** Row Eight *********************** */}
+        <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                    Any other comments about the student or on the Faculty Advisor..
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form row>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_comnt_frm_org_fac_advsr"
+                              placeholder="Enter here"
+                            />
+                          </Col>
+                        </FormGroup>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row nine *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                    Overall student performance
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      {/* <Form row> */}
+                   
+                          <Col xs="auto">
+                            <Form inline>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Outstanding"
+                                  />{" "}
+                                Outstanding
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Very Good"
+                                  />{" "}
+                                  Very Good
+                                </Label>
+                              </FormGroup>
+                              <FormGroup check>
+                                <Label check>
+                                  <Input
+                                    type="radio"
+                                    name="radio1"
+                                    value="Good"
+                                  />{" "}
+                              Good
+                                </Label>
+                              </FormGroup>
+                           
+                              </Form>
+                              </Col>
+             
+                    </div>
                   </CardBody>
                 </div>
               </Card>
