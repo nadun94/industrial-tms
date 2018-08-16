@@ -2,7 +2,7 @@ import Home from "views/Home/Home.jsx";
 import Icons from "views/Icons/Icons.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
-import superi5 from '../views/supervisor-i5/supervisor-i5.jsx';
+import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 var dashRoutes = [
   {

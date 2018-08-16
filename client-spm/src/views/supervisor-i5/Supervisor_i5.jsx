@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, Radio } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
 
-import { stud_perfomance, wrk_hbts } from "../../variables/var_i5.jsx";
+import { stud_perfomance, wrk_hbts } from "../../variables/var_i5";
 class Supervisor_i5 extends React.Component {
   constructor(props) {
     super(props);
@@ -16,10 +16,10 @@ class Supervisor_i5 extends React.Component {
       descrip_work_diff: "",
       descrip_positive_pc: "",
       descrip_pc_hep_pd: "",
-      descrip_effective_for_org_intern:'',
-      descrip_sugst_ip:'',
-      descrip_comnt_frm_org:'',
-      descrip_comnt_frm_org_fac_advsr:'',
+      descrip_effective_for_org_intern: "",
+      descrip_sugst_ip: "",
+      descrip_comnt_frm_org: "",
+      descrip_comnt_frm_org_fac_advsr: ""
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -330,7 +330,8 @@ class Supervisor_i5 extends React.Component {
                 <div className="card-content">
                   <CardHeader>
                     <h5 className="title">
-                    Please suggest ways you feel we could make our program more meaningful to the student and you, the employer.
+                      Please suggest ways you feel we could make our program
+                      more meaningful to the student and you, the employer.
                     </h5>
                   </CardHeader>
                   <CardBody>
@@ -352,7 +353,7 @@ class Supervisor_i5 extends React.Component {
               </Card>
             </Col>
           </Row>
-        
+
           {/* ********************** Row Eight *********************** */}
           <Row>
             <Col md={12} xs={12}>
@@ -360,7 +361,9 @@ class Supervisor_i5 extends React.Component {
                 <div className="card-content">
                   <CardHeader>
                     <h5 className="title">
-                    Please comment on the appropriateness of the student's academic training as it related to a position in your organization.
+                      Please comment on the appropriateness of the student's
+                      academic training as it related to a position in your
+                      organization.
                     </h5>
                   </CardHeader>
                   <CardBody>
@@ -382,14 +385,15 @@ class Supervisor_i5 extends React.Component {
               </Card>
             </Col>
           </Row>
-        {/* ********************** Row Eight *********************** */}
-        <Row>
+          {/* ********************** Row Eight *********************** */}
+          <Row>
             <Col md={12} xs={12}>
               <Card>
                 <div className="card-content">
                   <CardHeader>
                     <h5 className="title">
-                    Any other comments about the student or on the Faculty Advisor..
+                      Any other comments about the student or on the Faculty
+                      Advisor..
                     </h5>
                   </CardHeader>
                   <CardBody>
@@ -417,50 +421,42 @@ class Supervisor_i5 extends React.Component {
               <Card>
                 <div className="card-content">
                   <CardHeader>
-                    <h5 className="title">
-                    Overall student performance
-                    </h5>
+                    <h5 className="title">Overall student performance</h5>
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
                       {/* <Form row> */}
-                   
-                          <Col xs="auto">
-                            <Form inline>
-                              <FormGroup check>
-                                <Label check>
-                                  <Input
-                                    type="radio"
-                                    name="radio1"
-                                    value="Outstanding"
-                                  />{" "}
-                                Outstanding
-                                </Label>
-                              </FormGroup>
-                              <FormGroup check>
-                                <Label check>
-                                  <Input
-                                    type="radio"
-                                    name="radio1"
-                                    value="Very Good"
-                                  />{" "}
-                                  Very Good
-                                </Label>
-                              </FormGroup>
-                              <FormGroup check>
-                                <Label check>
-                                  <Input
-                                    type="radio"
-                                    name="radio1"
-                                    value="Good"
-                                  />{" "}
+
+                      <Col xs="auto">
+                        <Form inline>
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="radio"
+                                name="radio1"
+                                value="Outstanding"
+                              />{" "}
+                              Outstanding
+                            </Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="radio"
+                                name="radio1"
+                                value="Very Good"
+                              />{" "}
+                              Very Good
+                            </Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Label check>
+                              <Input type="radio" name="radio1" value="Good" />{" "}
                               Good
-                                </Label>
-                              </FormGroup>
-                           
-                              </Form>
-                              </Col>
-             
+                            </Label>
+                          </FormGroup>
+                        </Form>
+                      </Col>
                     </div>
                   </CardBody>
                 </div>
