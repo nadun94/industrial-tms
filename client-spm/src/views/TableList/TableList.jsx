@@ -11,8 +11,6 @@ import {
 
 import { PanelHeader } from "components";
 
-import { thead, tbody } from "variables/general";
-
 class RegularTables extends React.Component {
   render() {
     return (
@@ -29,7 +27,7 @@ class RegularTables extends React.Component {
                   <Table responsive>
                     <thead className="text-primary">
                       <tr>
-                        {thead.map((prop, key) => {
+                        {/* {thead.map((prop, key) => {
                           if (key === thead.length - 1)
                             return (
                               <th key={key} className="text-right">
@@ -37,11 +35,11 @@ class RegularTables extends React.Component {
                               </th>
                             );
                           return <th key={key}>{prop}</th>;
-                        })}
+                        })} */}
                       </tr>
                     </thead>
                     <tbody>
-                      {tbody.map((prop, key) => {
+                      {/* {tbody.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.data.map((prop, key) => {
@@ -55,7 +53,7 @@ class RegularTables extends React.Component {
                             })}
                           </tr>
                         );
-                      })}
+                      })} */}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -71,7 +69,7 @@ class RegularTables extends React.Component {
                   <Table responsive>
                     <thead className="text-primary">
                       <tr>
-                        {thead.map((prop, key) => {
+                        {/* {thead.map((prop, key) => {
                           if (key === thead.length - 1)
                             return (
                               <th key={key} className="text-right">
@@ -79,11 +77,11 @@ class RegularTables extends React.Component {
                               </th>
                             );
                           return <th key={key}>{prop}</th>;
-                        })}
+                        })} */}
                       </tr>
                     </thead>
                     <tbody>
-                      {tbody.map((prop, key) => {
+                      {/* {tbody.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.data.map((prop, key) => {
@@ -97,7 +95,7 @@ class RegularTables extends React.Component {
                             })}
                           </tr>
                         );
-                      })}
+                      })} */}
                     </tbody>
                   </Table>
                 </CardBody>
