@@ -24,12 +24,7 @@ var dashRoutes = [
     icon: "users_single-02",
     component: UserPage
   },
-  {
-    path: "/extended-tables",
-    name: "Table List",
-    icon: "files_paper",
-    component: TableList
-  },
+  
   {
     path: "/intern-Diary",
     name: "Internal Training Info",
