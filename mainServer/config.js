@@ -7,7 +7,8 @@ module.exports = {
             password: '7517',
             database: 'itmsdb',
             host: 'localhost',
-            dialect: 'mysql'
+            dialect: 'mysql',
+           
         }
     }
 }

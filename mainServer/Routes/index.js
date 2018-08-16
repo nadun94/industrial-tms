@@ -30,6 +30,10 @@ db.sequelize = sequelize;
   //Connection to the mysql datatabase
     // const Op = Sequelize.Op;
 
+  //IT16122192(rakshitha)employeeadd
+
+  require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+
 
   //Connection to the Mogodb
   
