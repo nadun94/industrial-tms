@@ -2,7 +2,7 @@ module.exports = function (app) {
   const config = require('../config.js');
   const mysql = require('mysql');
   const Sequelize = require('sequelize');
-  // const Op = Sequelize.Op;
+  const mongoose = require('mongoose');
   const db = {};
 
   const sequelize = new Sequelize(config.mysql.options)
@@ -15,13 +15,28 @@ module.exports = function (app) {
       process.exit(1);
     })
 
+config.mysql.client = sequelize;
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
   //create user
   require('../Controller/Login/login')(app, Sequelize, sequelize, db)
   //studentdetailsform1ys
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
 
-  config.mysql.client = sequelize;
-  db.Sequelize = Sequelize;
-  db.sequelize = sequelize;
+  //require formI5 controller
+  require('./supervisor_formI5_route/supervisor_formI5_route')(app)
 
+  //Connection to the mysql datatabase
+    // const Op = Sequelize.Op;
+
+
+  //Connection to the Mogodb
+  
+mongoose.connect('mongodb://localhost:27017/internship', (err) => {
+  if (err) {
+      console.log('Error connecting to mongodb')
+  }
+  console.log('MongoDB connection successfull')
+})
 }

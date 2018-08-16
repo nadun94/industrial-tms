@@ -12,12 +12,12 @@ class Supervisor_i5 extends React.Component {
       student_list: [],
       student: null,
       empName: "",
-      supervisorName: "",
-      descrip_work_diff: "",
-      descrip_positive_pc: "",
-      descrip_pc_hep_pd: "",
-      descrip_effective_for_org_intern: "",
-      descrip_sugst_ip: "",
+      supervisorName: "333",
+      descrip_work_diff: "232",
+      descrip_positive_pc: "7657",
+      descrip_pc_hep_pd: "7567",
+      descrip_effective_for_org_intern: "7567",
+      descrip_sugst_ip: "7567",
       descrip_comnt_frm_org: "",
       descrip_comnt_frm_org_fac_advsr: ""
     };
@@ -116,6 +116,7 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_work_diff"
                               placeholder="Enter here"
+                              value={this.state.descrip_work_diff}
                             />
                           </Col>
                         </FormGroup>
