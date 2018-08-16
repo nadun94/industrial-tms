@@ -17,7 +17,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
                 res.status(400).json({message: "address is not found or blank"});
             }
             else if(req.body.email==""||req.body.email==undefined){
-                res.status(400).json({message: "email is not found or blank"});
+                res.status(400).json({message: "address is not found or blank"});
             }
             else{
             db.stddetable.create({
