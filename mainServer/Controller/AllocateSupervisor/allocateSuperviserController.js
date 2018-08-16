@@ -9,26 +9,10 @@ module.exports = function (app, Sequelize, sequelize, db)
 
 
 
-    app.route('/getallstudentlist/')
+    app.route('/getallstudentlist')
         .get((req, res) => {
             console.log(req.params.para);
-            db.studentDetails.find({
-                where: {
-                    $or: [
-                        {
-                            name:
-                                {
-                                    $eq: req.params.para
-                                }
-                        },
-                        {
-                            stdid:
-                                {
-                                    $eq:  req.params.para
-                                }
-                        }
-                    ]
-                }
+            db.studentDetails.findAll({
             }).then(data => {
 
                 res.send(JSON.stringify({
@@ -47,6 +31,7 @@ module.exports = function (app, Sequelize, sequelize, db)
                 studentName:req.body.studentName,
                 supervisorName:req.body.supervisorName,
                 }).then(newSuperallocate => {
+                    console.log(newSuperallocate)
                     res.send(JSON.stringify({
                     "record": newSuperallocate,
                     'message': "Successfully created the record."
