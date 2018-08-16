@@ -4,6 +4,8 @@ import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
+import reg from "../views/Test/Test.jsx";
+
 var dashRoutes = [
   {
     path: "/home",
@@ -34,6 +36,12 @@ var dashRoutes = [
     name: "Form I5 for Supervisor",
     icon: "files_paper",
     component: superi5
+  },
+  {
+    path: "/studnent_reg",
+    name: "Registration ****",
+    icon: "files_paper",
+    component: reg
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
