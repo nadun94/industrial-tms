@@ -26,7 +26,13 @@ db.sequelize = sequelize;
   //require formI5 controller
   require('./supervisor_formI5_route/supervisor_formI5_route')(app)
 
+    //add companysupervisor
+    require('../Controller/addSupervisors/addSupervisorsController')(app, Sequelize, sequelize, db)
+
+   //allocate supervisor
     require('../Controller/AllocateSupervisor/allocateSuperviserController.js')(app, Sequelize, sequelize, db)
+
+
 
     //Connection to the mysql datatabase
     // const Op = Sequelize.Op;

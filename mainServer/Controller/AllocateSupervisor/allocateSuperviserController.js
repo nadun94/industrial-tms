@@ -3,10 +3,40 @@ module.exports = function (app, Sequelize, sequelize, db)
 {
 
     db.studentDetails = require('../../Model/RegStudent')(sequelize, Sequelize)
-    db.supervisorDetails = require('../../Model/studentsuperviserf1')(sequelize, Sequelize)
+    db.studentDetails2 = require('../../Model/stdfilli-1')(sequelize, Sequelize)
+    db.supervisorDetails = require('../../Model/addCompanySupervisors/addSupervisors')(sequelize, Sequelize)
     db.assignSupervisor = require('../../Model/assignSupervisor/assignSupervisor')(sequelize, Sequelize)
     sequelize.sync();
 
+
+
+    app.route('/getstudent/:para')
+        .get((req, res) => {
+            console.log(req.params.para);
+            db.studentDetails.find({
+            }).then(data => {
+
+                res.send(JSON.stringify({
+                    "stdid": data.stdid,"name":data.name,"email":data.email,"mobilephone":data.mobilephone,
+                    "semester":data.semester,"gpa":data.gpa,
+                    "company":data.company,"intern_position":data.intern_position
+
+                }))
+            })
+        })
+
+    app.route('/getsupervisor/:para')
+        .get((req, res) => {
+            console.log(req.params.para);
+            db.supervisorDetails.find({
+            }).then(data => {
+
+                res.send(JSON.stringify({
+                    "supervisorId": data.supervisorId, "supervisername": data.supervisername,
+                    "supervisertitle":data.supervisertitle,"assignedProject":data.assignedProject
+                }))
+            })
+        })
 
 
     app.route('/getallstudentlist')
@@ -16,7 +46,21 @@ module.exports = function (app, Sequelize, sequelize, db)
             }).then(data => {
 
                 res.send(JSON.stringify({
-                    "record": data
+                    "stdid": data.stdid,"name":data.name
+
+                }))
+            })
+        })
+
+
+    app.route('/getallsupervisorslist')
+        .get((req, res) => {
+            console.log(req.params.para);
+            db.supervisorDetails.findAll({
+            }).then(data => {
+
+                res.send(JSON.stringify({
+                    "supervisorId": data.supervisorId, "supervisername": data.supervisorId
                 }))
             })
         })
