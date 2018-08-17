@@ -18,6 +18,10 @@ module.exports = function (app) {
   //create user
   require('../Controller/Login/login')(app, Sequelize, sequelize, db)
 
+  //IT16122192(rakshitha)employeeadd
+
+  require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+
   config.mysql.client = sequelize;
   db.Sequelize = Sequelize;
   db.sequelize = sequelize;
