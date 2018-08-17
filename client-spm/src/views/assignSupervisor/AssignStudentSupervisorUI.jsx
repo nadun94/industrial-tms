@@ -141,7 +141,6 @@ class AssignStudentSupervisorUI extends React.Component {
                                                         type="text"
                                                         name="empName"
                                                         placeholder=""
-
                                                     />
                                                 </Col>
                                             </FormGroup>

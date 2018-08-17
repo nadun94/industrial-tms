@@ -46,7 +46,7 @@ module.exports = function (app, Sequelize, sequelize, db)
             }).then(data => {
 
                 res.send(JSON.stringify({
-                    "stdid": data.stdid,"name":data.name
+                    "stdid": data.stdid
 
                 }))
             })
