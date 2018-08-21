@@ -4,7 +4,9 @@ import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
+
 import reg from "../views/Test/Test.jsx";
+import AssignStudentSupervisorUI from "../views/assignSupervisor/AssignStudentSupervisorUI.jsx";
 
 var dashRoutes = [
   {
@@ -37,6 +39,13 @@ var dashRoutes = [
     icon: "files_paper",
     component: superi5
   },
+  {
+     path: "/assignSupervisor",
+     name: "Assign Supervisor for Student",
+     icon: "files_paper",
+     component: AssignStudentSupervisorUI
+  },
+
   {
     path: "/studnent_reg",
     name: "Registration ****",
