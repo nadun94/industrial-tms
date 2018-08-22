@@ -7,6 +7,7 @@ import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 import reg from "../views/Test/Test.jsx";
 import AssignStudentSupervisorUI from "../views/assignSupervisor/AssignStudentSupervisorUI.jsx";
+import DisplayFormI5 from "../views/DisplayFormI5/DisplayFormI5";
 
 var dashRoutes = [
   {
@@ -40,10 +41,17 @@ var dashRoutes = [
     component: superi5
   },
   {
-     path: "/assignSupervisor",
+     path: "/assignsupervisor",
      name: "Assign Supervisor for Student",
      icon: "files_paper",
      component: AssignStudentSupervisorUI
+  },
+
+  {
+     path: "/displayformi5for_external_supervisor",
+     name: "Display form I-5 for External Supervisor",
+     icon: "files_paper",
+     component: DisplayFormI5
   },
 
   {

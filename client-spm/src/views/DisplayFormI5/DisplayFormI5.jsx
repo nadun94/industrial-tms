@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
-import { Button, Form, FormGroup, Label, Input, Radio } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Radio,Table } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
 
 import { stud_perfomance, wrk_hbts } from "../../variables/var_i5";
-class Supervisor_i5 extends React.Component {
+class DisplayFormI5 extends React.Component {
     constructor(props) {
         super(props);
 
@@ -36,7 +36,7 @@ class Supervisor_i5 extends React.Component {
                 <div className="content">
                     {/* ********************** Row one *********************** */}
                     <Row>
-                        <Col md={8} xs={12}>
+                        <Col md={20} xs={12}>
                             <Card>
                                 <div className="card-content">
                                     <CardHeader>
@@ -45,11 +45,11 @@ class Supervisor_i5 extends React.Component {
                                     <CardBody>
                                         <Form>
                                             <FormGroup>
-                                                <Label for="exampleSelect">Select Student</Label>
+                                                <Label for="selectStudent">Select Student</Label>
                                                 <Input
                                                     type="select"
                                                     name="student"
-                                                    id="exampleSelect"
+                                                    id="selectStudent"
                                                     onChange={this.onSelectChange.bind(this)}
                                                     value={this.state.student}
                                                 >
@@ -63,34 +63,217 @@ class Supervisor_i5 extends React.Component {
                                                 </Button>
                                             </FormGroup>
                                         </Form>
-                                        <Form inline>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Card>
+                                                        <div className="card-content">
+                                                            <CardHeader>
+                                                                <h4 className="title">Final evaluation of internship Student</h4>
+                                                            </CardHeader>
+                                                            <CardBody>
+                                                                <Form>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">Basic Student Record</h5>
+                                                                        </Label>
+                                                                        <Table responsive>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Student ID</th>
+                                                                                <th>Student Name</th>
+                                                                                <th>Supervisor ID</th>
+                                                                                <th>Supervisor Name</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </Table>
+                                                                    </FormGroup>
+                                                                    <br />
+                                                                    <FormGroup>
+                                                                    <Label><h5 className="title">Contract Differences</h5>
+                                                                    </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">Performance of Student</h5>
+                                                                        </Label>
+                                                                        <Table responsive>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Evaluation Category</th>
+                                                                                <th>Evaluation</th>
 
-                                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                                <Row>
-                                                <Label sm={2} className="mr-sm-2">
-                                                    Employer Name
-                                                </Label>
-                                            <Input
-                                                type="text"
-                                                name="empName"
-                                                placeholder="Employer Name"
-                                                disabled
-                                                    />
-                                                </Row>
-                                            </FormGroup>
-                                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                                <Label sm={2} className="mr-sm-2">
-                                                    Supervisor Name
-                                                </Label>
-                                                <Col sm={10}>
-                                                    <Input
-                                                        type="text"
-                                                        name="supervisorName"
-                                                        placeholder="Supervisor Name"
-                                                        disabled
-                                                    />
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </Table>
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">Work Habits of Student</h5>
+                                                                        </Label>
+                                                                        <Table responsive>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Evaluation Category</th>
+                                                                                <th> Evaluation</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </Table>
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">positive personal characteristics</h5>
+                                                                        </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">personal characteristics to enhance student professional development</h5>
+
+                                                                        </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">Suggestions to improve internship program</h5>
+                                                                        </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">appropriateness of the student's
+                                                                            academic training as it related to a position in organization</h5>
+                                                                        </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5 className="title">other comments about the student or on the Faculty Advisor</h5>
+
+                                                                        </Label>
+                                                                        <Input
+                                                                            type="textarea"
+                                                                            name="contractDiff"
+                                                                            id="contractDiff"
+                                                                            placeholder=" "
+                                                                        />
+                                                                    </FormGroup>
+                                                                    <br/>
+                                                                    <FormGroup>
+                                                                        <Label><h5>Overall Student Performance</h5></Label>
+                                                                        <Input type="text"
+                                                                        name="overallPerformance"
+                                                                        id="overallPerformance"></Input>
+                                                                    </FormGroup>
+                                                                 </Form>
+                                                            </CardBody>
+                                                        </div>
+                                                    </Card>
+
                                                 </Col>
-                                            </FormGroup>
+                                            </Row>
+
                                         </Form>
                                     </CardBody>
                                 </div>
@@ -105,4 +288,4 @@ class Supervisor_i5 extends React.Component {
     }
 }
 
-export default Supervisor_i5;
+export default DisplayFormI5;
