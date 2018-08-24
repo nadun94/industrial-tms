@@ -3,6 +3,7 @@ import Icons from "views/Icons/Icons.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
+import stureg from "../views/StudentReg/Studentreg.jsx";
 
 import reg from "../views/Test/Test.jsx";
 
@@ -42,6 +43,12 @@ var dashRoutes = [
     name: "Registration ****",
     icon: "files_paper",
     component: reg
+  },
+  {
+    path: "/StudentReg",
+    name: "Student Registration",
+    icon: "education_paper",
+    component: stureg
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
