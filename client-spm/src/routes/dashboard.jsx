@@ -5,11 +5,8 @@ import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 import reg from "../views/Test/Test.jsx";
-<<<<<<< HEAD
 import EmployeeReg from "../views/EmployeeReg/EmployeeReg.jsx";
-=======
 import student_form1 from "../views/stdform1-ys/fillform_1";
->>>>>>> 9980c6d33213a544794b3d1704d6b1746e883ed0
 
 var dashRoutes = [
   {
