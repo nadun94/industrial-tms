@@ -12,23 +12,119 @@ class Supervisor_i5 extends React.Component {
       student_list: [],
       student: null,
       empName: "",
-      supervisorName: "333",
-      descrip_work_diff: "232",
-      descrip_positive_pc: "7657",
-      descrip_pc_hep_pd: "7567",
-      descrip_effective_for_org_intern: "7567",
-      descrip_sugst_ip: "7567",
+      supervisorName: "",
+      descrip_work_diff: "",
+      descrip_positive_pc: "",
+      descrip_pc_hep_pd: "",
+      descrip_effective_for_org_intern: "",
+      descrip_sugst_ip: "",
       descrip_comnt_frm_org: "",
-      descrip_comnt_frm_org_fac_advsr: ""
+      descrip_comnt_frm_org_fac_advsr: "",
+      status_perfomance: [],
+      radio_perf_temp_1: [],
+      comment_perf_temp_1: [],
+      perfom_atrribure_1: [],
+      status_habbits: [],
+      radio_perf_temp_2: [],
+      comment_perf_temp_2: [],
+      perfom_atrribure_2: [],
+      work_habbit_obj: [{}],
+      perm_obj: [{}]
     };
 
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.testman = this.testman.bind(this);
+    // this.handleChange_text_normal = this.handleChange_text_normal.bind(this);
+  }
+  componentDidMount() {
+    this.setState({ perfom_atrribure_1: stud_perfomance });
+    this.setState({ perfom_atrribure_2: wrk_hbts });
+  }
+  testman() {
+    this.state.perm_obj.push(
+      this.state.perfom_atrribure_1,
+      this.state.radio_perf_temp_1,
+      this.state.comment_perf_temp_1
+    );
+    this.state.work_habbit_obj.push(
+      this.state.perfom_atrribure_2,
+      this.state.radio_perf_temp_2,
+      this.state.comment_perf_temp_2
+    );
+
+    console.log(
+      this.state.perm_obj[1][0],
+      this.state.perm_obj[2][0],
+      this.state.perm_obj[3][0]
+    );
+    console.log(
+      this.state.perm_obj[1][1],
+      this.state.perm_obj[2][1],
+      this.state.perm_obj[3][1]
+    );
+
+    console.log(
+      this.state.work_habbit_obj[1][0],
+      this.state.work_habbit_obj[2][0],
+      this.state.work_habbit_obj[3][0]
+    );
+    console.log(
+      this.state.work_habbit_obj[1][1],
+      this.state.work_habbit_obj[2][1],
+      this.state.work_habbit_obj[3][1]
+    );
   }
 
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  //   //text box handling for student performance
+  handleClick(index, event) {
+    let a = this.state.comment_perf_temp_1.slice();
+    a[index] = event.target.value;
+    this.setState({ comment_perf_temp_1: a });
+    //  console.log(this.state.comment_perf_temp_1)
+  }
+  //text box handling for student work habbits
+  handleClick_2(index, event) {
+    let a = this.state.comment_perf_temp_2.slice();
+    a[index] = event.target.value;
+    this.setState({ comment_perf_temp_2: a });
+  }
   onSelectChange(event) {
     this.setState({ student: event.target.value });
   }
+
+  // for student performance radio button data extraction
+  radio_std_perform(index, event) {
+    let a = this.state.radio_perf_temp_1.slice();
+
+    if (event.target.value === "Above Average") {
+      a[index] = "Above Average";
+    } else if (event.target.value === "Average") {
+      a[index] = "Average";
+    } else if (event.target.value === "Below Average") {
+      a[index] = "Below Average";
+    }
+    this.setState({ radio_perf_temp_1: a });
+  }
+
+  // for student habbit radio button data extraction
+  radio_std_work_habbit(index, event) {
+    let a = this.state.radio_perf_temp_2.slice();
+
+    if (event.target.value === "Above Average") {
+      a[index] = "Above Average";
+    } else if (event.target.value === "Average") {
+      a[index] = "Average";
+    } else if (event.target.value === "Below Average") {
+      a[index] = "Below Average";
+    }
+    this.setState({ radio_perf_temp_2: a });
+  }
+
   render() {
     return (
       <div>
@@ -105,6 +201,7 @@ class Supervisor_i5 extends React.Component {
                     <h5 className="title">
                       Describe the differences, if any, between student's
                       initial contract and actual assignment which developed
+                      {this.state.descrip_work_diff}
                     </h5>
                   </CardHeader>
                   <CardBody>
@@ -117,6 +214,7 @@ class Supervisor_i5 extends React.Component {
                               name="descrip_work_diff"
                               placeholder="Enter here"
                               value={this.state.descrip_work_diff}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -136,6 +234,7 @@ class Supervisor_i5 extends React.Component {
                     <h5 className="title">Performance of Student</h5>
                   </CardHeader>
                   <CardBody>
+                    {/* {this.studentPerformanceRecord()} */}
                     {stud_perfomance.map((item, key) => {
                       return (
                         <Form inline>
@@ -148,8 +247,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio1" + key}
                                     value="Above Average"
+                                    onChange={this.radio_std_perform.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Above Average
                                 </Label>
@@ -158,8 +261,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio1" + key}
                                     value="Average"
+                                    onChange={this.radio_std_perform.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Average
                                 </Label>
@@ -168,8 +275,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio1" + key}
                                     value="Below Average"
+                                    onChange={this.radio_std_perform.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Below Average
                                 </Label>
@@ -180,9 +291,11 @@ class Supervisor_i5 extends React.Component {
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                               <Input
                                 type="text"
-                                name="comment"
+                                name="comment_2"
                                 placeholder=" Comments, Examples"
                                 bsSize="large"
+                                id={key}
+                                onChange={this.handleClick.bind(this, key)}
                               />
                             </FormGroup>
                           </Col>
@@ -190,6 +303,10 @@ class Supervisor_i5 extends React.Component {
                         </Form>
                       );
                     })}
+                    <Button color="info" size="lg" onClick={this.testman}>
+                      test
+                    </Button>
+                    {/* --------------------------------------------------------------------------------------------------------------------- */}
                   </CardBody>
                 </div>
               </Card>
@@ -216,8 +333,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio2" + key}
                                     value="Above Average"
+                                    onChange={this.radio_std_work_habbit.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Above Average
                                 </Label>
@@ -226,8 +347,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio2" + key}
                                     value="Average"
+                                    onChange={this.radio_std_work_habbit.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Average
                                 </Label>
@@ -236,8 +361,12 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name="radio1"
+                                    name={"radio2" + key}
                                     value="Below Average"
+                                    onChange={this.radio_std_work_habbit.bind(
+                                      this,
+                                      key
+                                    )}
                                   />{" "}
                                   Below Average
                                 </Label>
@@ -251,6 +380,8 @@ class Supervisor_i5 extends React.Component {
                                 name="comment"
                                 placeholder=" Comments, Examples"
                                 bsSize="large"
+                                id={key}
+                                onChange={this.handleClick_2.bind(this, key)}
                               />
                             </FormGroup>
                           </Col>
@@ -284,6 +415,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_positive_pc"
                               placeholder="Enter here"
+                              onChange={this.handleChange}
+                              value={this.state.descrip_positive_pc}
                             />
                           </Col>
                         </FormGroup>
@@ -314,6 +447,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_pc_hep_pd"
                               placeholder="Enter here"
+                              value={this.state.descrip_pc_hep_pd}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -344,6 +479,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_sugst_ip"
                               placeholder="Enter here"
+                              value={this.state.descrip_sugst_ip}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -376,6 +513,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_comnt_frm_org"
                               placeholder="Enter here"
+                              value={this.state.descrip_comnt_frm_org}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -406,6 +545,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_comnt_frm_org_fac_advsr"
                               placeholder="Enter here"
+                              value={this.state.descrip_comnt_frm_org_fac_advsr}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
