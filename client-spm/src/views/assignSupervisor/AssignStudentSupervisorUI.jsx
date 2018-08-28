@@ -15,22 +15,15 @@ class AssignStudentSupervisorUI extends React.Component {
             supervisorId:null,
             studentName: null,
             supervisorName: null,
+            opt1:''
 
 
-            /*
-            empName: "",
-            supervisorName: "",
-            descrip_work_diff: "",
-            descrip_positive_pc: "",
-            descrip_pc_hep_pd: "",
-            descrip_effective_for_org_intern: "",
-            descrip_sugst_ip: "",
-            descrip_comnt_frm_org: "",
-            descrip_comnt_frm_org_fac_advsr: ""*/
+
         };
 
         // this.handleChange = this.handleChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
+        this.onSupervisorSelectChange=this.onSupervisorSelectChange.bind(this);
     }
 
     onSelectChange(event) {
@@ -39,7 +32,45 @@ class AssignStudentSupervisorUI extends React.Component {
     onSupervisorSelectChange(event) {
         this.setState({ supervisorId: event.target.value });
     }
+//***************************
+    componentDidMount(){
 
+        var self = this;
+        fetch('/getallstudentlist')
+            .then(res => res.json())
+            .then(data => {
+                self.setState({ student_list: data["stdid"] })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        fetch('/getallsupervisorslist')
+            .then(res => res.json())
+            .then(data => {
+                self.setState({ supervisor_list: data["supervisorId"] })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+
+    //    88888888888888888
+        let temp = this.state.student_list.map((item, key) => [
+            <option value={item.stdid}>{item.stdid}</option>
+        ])
+        this.setState({ studentId: temp })
+
+        let temp2 = this.state.supervisor_list.map((item, key) => [
+            <option value={item.supervisorId}>{item.supervisorId}</option>
+        ])
+        this.setState({ supervisorId: temp2 })
+
+
+    //    88888888888888
+
+
+    }
 
 
 
@@ -69,6 +100,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     onChange={this.onSelectChange.bind(this)}
                                                     value={this.state.studentId}
                                                 >
+                                                    {/*this.state.studentId*/}
                                                     <option value="">Select Student</option>
                                                     <option value="Nadun">Nadun Sirimevan</option>
                                                     <option value="Mia">Mia</option>
@@ -242,6 +274,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+
                                                     <tr>
                                                         <th scope="row">1</th>
                                                         <td><Input
@@ -251,9 +284,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                             onChange={this.onSelectChange.bind(this)}
                                                             value={this.state.studentId}
                                                         >
-                                                            <option value="">Select Student ID</option>
-                                                            <option value="Nadun">Nadun Sirimevan</option>
-                                                            <option value="Mia">Mia</option>
+                                                            {this.state.studentId}
                                                         </Input></td>
 
                                                         <td><Input
@@ -261,11 +292,10 @@ class AssignStudentSupervisorUI extends React.Component {
                                                             name="student"
                                                             id="selectStudent"
                                                             onChange={this.onSelectChange.bind(this)}
-                                                            value={this.state.studentId}
+                                                            value={this.state.supervisorId}
                                                         >
-                                                            <option value="">Select Supervisor ID</option>
-                                                            <option value="Nadun">Nadun Sirimevan</option>
-                                                            <option value="Mia">Mia</option>
+                                                            {this.state.supervisorId}
+
                                                         </Input></td>
                                                         </tr>
                                                     </tbody>
