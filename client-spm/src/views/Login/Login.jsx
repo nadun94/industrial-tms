@@ -25,7 +25,7 @@ export default class Login extends Component {
   }
 
   processLog() {
-    this.setState({ loading: true });
+    this.handleattributes({ loading: true });
     var self = this;
     axios
       .post("/login", {
@@ -34,18 +34,18 @@ export default class Login extends Component {
       })
       .then(function(res) {
         if (res.data.token != null) {
-          self.setState({ loading: false });
+          self.handleattributes({ loading: false });
           sessionStorage.setItem("loging_status", res.data.loging_status);
           sessionStorage.setItem("token", res.data.token);
           sessionStorage.setItem("user", res.data.user);
           sessionStorage.setItem("username", res.data.username);
-          self.setState({ show_error_login: false });
+          self.handleattributes({ show_error_login: false });
           window.location.reload();
           let token = res.data.token;
-          self.setState({ token: token });
+          self.handleattributes({ token: token });
         } else {
-          self.setState({ loading: false });
-          self.setState({ show_error_login: true });
+          self.handleattributes({ loading: false });
+          self.handleattributes({ show_error_login: true });
         }
       })
       .catch(function(error) {
@@ -56,7 +56,7 @@ export default class Login extends Component {
     return this.state.username.length > 0 && this.state.password.length > 0;
   }
   handleChange({ target }) {
-    this.setState({
+    this.handleattributes({
       [target.id]: target.value
     });
   }

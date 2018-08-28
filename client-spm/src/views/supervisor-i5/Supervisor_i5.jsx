@@ -11,10 +11,10 @@ class Supervisor_i5 extends React.Component {
     this.state = {
       student_list: [],
       student: null,
-      empName: '',
-      supervisorName: '',
-      descrip_work_diff: '',
-      descrip_positive_pc: '',
+      empName: "",
+      supervisorName: "",
+      descrip_work_diff: "",
+      descrip_positive_pc: "",
       descrip_pc_hep_pd: "",
       descrip_effective_for_org_intern: "",
       descrip_sugst_ip: "",
@@ -28,43 +28,59 @@ class Supervisor_i5 extends React.Component {
       radio_perf_temp_2: [],
       comment_perf_temp_2: [],
       perfom_atrribure_2: [],
-      work_habbit_obj:[{}],
-      perm_obj: [{}],
-
-
+      work_habbit_obj: [{}],
+      perm_obj: [{}]
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.testman = this.testman.bind(this);
     // this.handleChange_text_normal = this.handleChange_text_normal.bind(this);
-    
   }
   componentDidMount() {
-
-    this.setState({ perfom_atrribure_1: stud_perfomance })
-    this.setState({ perfom_atrribure_2: wrk_hbts })
+    this.setState({ perfom_atrribure_1: stud_perfomance });
+    this.setState({ perfom_atrribure_2: wrk_hbts });
   }
   testman() {
+    this.state.perm_obj.push(
+      this.state.perfom_atrribure_1,
+      this.state.radio_perf_temp_1,
+      this.state.comment_perf_temp_1
+    );
+    this.state.work_habbit_obj.push(
+      this.state.perfom_atrribure_2,
+      this.state.radio_perf_temp_2,
+      this.state.comment_perf_temp_2
+    );
 
-    this.state.perm_obj.push(this.state.perfom_atrribure_1, this.state.radio_perf_temp_1, this.state.comment_perf_temp_1);
-    this.state.work_habbit_obj.push(this.state.perfom_atrribure_2, this.state.radio_perf_temp_2, this.state.comment_perf_temp_2);
-    
+    console.log(
+      this.state.perm_obj[1][0],
+      this.state.perm_obj[2][0],
+      this.state.perm_obj[3][0]
+    );
+    console.log(
+      this.state.perm_obj[1][1],
+      this.state.perm_obj[2][1],
+      this.state.perm_obj[3][1]
+    );
 
-    console.log(this.state.perm_obj[1][0], this.state.perm_obj[2][0], this.state.perm_obj[3][0])
-    console.log(this.state.perm_obj[1][1], this.state.perm_obj[2][1], this.state.perm_obj[3][1])
-
-    console.log(this.state.work_habbit_obj[1][0], this.state.work_habbit_obj[2][0], this.state.work_habbit_obj[3][0])
-    console.log(this.state.work_habbit_obj[1][1], this.state.work_habbit_obj[2][1], this.state.work_habbit_obj[3][1])
+    console.log(
+      this.state.work_habbit_obj[1][0],
+      this.state.work_habbit_obj[2][0],
+      this.state.work_habbit_obj[3][0]
+    );
+    console.log(
+      this.state.work_habbit_obj[1][1],
+      this.state.work_habbit_obj[2][1],
+      this.state.work_habbit_obj[3][1]
+    );
   }
-  
-
 
   handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-//   //text box handling for student performance
+  //   //text box handling for student performance
   handleClick(index, event) {
     let a = this.state.comment_perf_temp_1.slice();
     a[index] = event.target.value;
@@ -86,17 +102,11 @@ class Supervisor_i5 extends React.Component {
     let a = this.state.radio_perf_temp_1.slice();
 
     if (event.target.value === "Above Average") {
-
-      a[index] = "Above Average"
-
+      a[index] = "Above Average";
     } else if (event.target.value === "Average") {
-
-      a[index] = "Average"
-
+      a[index] = "Average";
     } else if (event.target.value === "Below Average") {
-
-      a[index] = "Below Average"
-
+      a[index] = "Below Average";
     }
     this.setState({ radio_perf_temp_1: a });
   }
@@ -106,21 +116,14 @@ class Supervisor_i5 extends React.Component {
     let a = this.state.radio_perf_temp_2.slice();
 
     if (event.target.value === "Above Average") {
-
-      a[index] = "Above Average"
-
+      a[index] = "Above Average";
     } else if (event.target.value === "Average") {
-
-      a[index] = "Average"
-
+      a[index] = "Average";
     } else if (event.target.value === "Below Average") {
-
-      a[index] = "Below Average"
-
+      a[index] = "Below Average";
     }
     this.setState({ radio_perf_temp_2: a });
   }
-
 
   render() {
     return (
@@ -167,7 +170,6 @@ class Supervisor_i5 extends React.Component {
                             name="empName"
                             placeholder="Employer Name"
                             disabled
-                     
                           />
                         </Col>
                       </FormGroup>
@@ -181,7 +183,6 @@ class Supervisor_i5 extends React.Component {
                             name="supervisorName"
                             placeholder="Supervisor Name"
                             disabled
-                
                           />
                         </Col>
                       </FormGroup>
@@ -210,14 +211,12 @@ class Supervisor_i5 extends React.Component {
                           <Col sm={10}>
                             <Input
                               type="textarea"
-                               name="descrip_work_diff"
+                              name="descrip_work_diff"
                               placeholder="Enter here"
                               value={this.state.descrip_work_diff}
                               onChange={this.handleChange}
-                    
                             />
                           </Col>
-                         
                         </FormGroup>
                       </Form>
                     </div>
@@ -306,7 +305,7 @@ class Supervisor_i5 extends React.Component {
                     })}
                     <Button color="info" size="lg" onClick={this.testman}>
                       test
-                        </Button>
+                    </Button>
                     {/* --------------------------------------------------------------------------------------------------------------------- */}
                   </CardBody>
                 </div>
@@ -334,7 +333,7 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name={"radio2"+key}
+                                    name={"radio2" + key}
                                     value="Above Average"
                                     onChange={this.radio_std_work_habbit.bind(
                                       this,
@@ -348,7 +347,7 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name={"radio2"+key}
+                                    name={"radio2" + key}
                                     value="Average"
                                     onChange={this.radio_std_work_habbit.bind(
                                       this,
@@ -362,7 +361,7 @@ class Supervisor_i5 extends React.Component {
                                 <Label check>
                                   <Input
                                     type="radio"
-                                    name={"radio2"+key}
+                                    name={"radio2" + key}
                                     value="Below Average"
                                     onChange={this.radio_std_work_habbit.bind(
                                       this,

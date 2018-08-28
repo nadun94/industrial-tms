@@ -5,6 +5,7 @@ import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 import reg from "../views/Test/Test.jsx";
+import student_form1 from "../views/stdform1-ys/fillform_1";
 
 var dashRoutes = [
   {
@@ -42,6 +43,12 @@ var dashRoutes = [
     name: "Registration ****",
     icon: "files_paper",
     component: reg
+  },
+  {
+    path: "/student_form",
+    name: "student form first fill up",
+    icon: "users_single-02",
+    component: student_form1
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
