@@ -11,13 +11,13 @@ class Supervisor_i5 extends React.Component {
     this.state = {
       student_list: [],
       student: null,
-      empName: "",
-      supervisorName: "333",
-      descrip_work_diff: "232",
-      descrip_positive_pc: "7657",
-      descrip_pc_hep_pd: "7567",
-      descrip_effective_for_org_intern: "7567",
-      descrip_sugst_ip: "7567",
+      empName: '',
+      supervisorName: '',
+      descrip_work_diff: '',
+      descrip_positive_pc: '',
+      descrip_pc_hep_pd: "",
+      descrip_effective_for_org_intern: "",
+      descrip_sugst_ip: "",
       descrip_comnt_frm_org: "",
       descrip_comnt_frm_org_fac_advsr: "",
       status_perfomance: [],
@@ -31,9 +31,10 @@ class Supervisor_i5 extends React.Component {
       work_habbit_obj:[{}],
       perm_obj: [{}],
 
+
     };
 
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.testman = this.testman.bind(this);
     // this.handleChange_text_normal = this.handleChange_text_normal.bind(this);
@@ -56,12 +57,13 @@ class Supervisor_i5 extends React.Component {
     console.log(this.state.work_habbit_obj[1][0], this.state.work_habbit_obj[2][0], this.state.work_habbit_obj[3][0])
     console.log(this.state.work_habbit_obj[1][1], this.state.work_habbit_obj[2][1], this.state.work_habbit_obj[3][1])
   }
+  
 
 
-//   handleChange_text_normal(event) {
-//     this.setState({ value: event.target.value });
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
+  }
 
-// }
 //   //text box handling for student performance
   handleClick(index, event) {
     let a = this.state.comment_perf_temp_1.slice();
@@ -198,6 +200,7 @@ class Supervisor_i5 extends React.Component {
                     <h5 className="title">
                       Describe the differences, if any, between student's
                       initial contract and actual assignment which developed
+                      {this.state.descrip_work_diff}
                     </h5>
                   </CardHeader>
                   <CardBody>
@@ -207,12 +210,14 @@ class Supervisor_i5 extends React.Component {
                           <Col sm={10}>
                             <Input
                               type="textarea"
-                              name="descrip_work_diff"
+                               name="descrip_work_diff"
                               placeholder="Enter here"
                               value={this.state.descrip_work_diff}
+                              onChange={this.handleChange}
                     
                             />
                           </Col>
+                         
                         </FormGroup>
                       </Form>
                     </div>
@@ -411,7 +416,7 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_positive_pc"
                               placeholder="Enter here"
-                              onChange={this.handleChange_text_normal}
+                              onChange={this.handleChange}
                               value={this.state.descrip_positive_pc}
                             />
                           </Col>
@@ -443,6 +448,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_pc_hep_pd"
                               placeholder="Enter here"
+                              value={this.state.descrip_pc_hep_pd}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -473,6 +480,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_sugst_ip"
                               placeholder="Enter here"
+                              value={this.state.descrip_sugst_ip}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -505,6 +514,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_comnt_frm_org"
                               placeholder="Enter here"
+                              value={this.state.descrip_comnt_frm_org}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
@@ -535,6 +546,8 @@ class Supervisor_i5 extends React.Component {
                               type="textarea"
                               name="descrip_comnt_frm_org_fac_advsr"
                               placeholder="Enter here"
+                              value={this.state.descrip_comnt_frm_org_fac_advsr}
+                              onChange={this.handleChange}
                             />
                           </Col>
                         </FormGroup>
