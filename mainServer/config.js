@@ -6,7 +6,7 @@ module.exports = {
             port: 1433,
             password: '1qaz2wsx@',
             database: 'itmsdb',
-            host: 'localhost',
+            host: 'spm.database.windows.net',
             dialect: 'mysql',
            
         }
