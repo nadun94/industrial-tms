@@ -6,6 +6,7 @@ import superi5 from "../views/supervisor-i5/Supervisor_i5";
 import stureg from "../views/StudentReg/Studentreg.jsx";
 
 import reg from "../views/Test/Test.jsx";
+import student_form1 from "../views/stdform1-ys/fillform_1";
 
 var dashRoutes = [
   {
@@ -49,6 +50,13 @@ var dashRoutes = [
     name: "Student Registration",
     icon: "education_paper",
     component: stureg
+  }
+,
+{
+    path: "/student_form",
+    name: "student form first fill up",
+    icon: "users_single-02",
+    component: student_form1
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
