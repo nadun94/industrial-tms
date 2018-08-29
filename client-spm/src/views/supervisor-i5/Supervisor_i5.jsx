@@ -1,79 +1,132 @@
 import React from "react";
-import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, Radio } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
-
+import axios from "axios";
 import { stud_perfomance, wrk_hbts } from "../../variables/var_i5";
+
 class Supervisor_i5 extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       student_list: [],
-      student: null,
-      empName: "",
-      supervisorName: "",
+      student_name: "",
+      studentID: "IT1610856",
+      empName: "Pearson",
+      supervisorName: "Hatangala",
       descrip_work_diff: "",
       descrip_positive_pc: "",
       descrip_pc_hep_pd: "",
       descrip_effective_for_org_intern: "",
       descrip_sugst_ip: "",
+      overall_perf: null,
       descrip_comnt_frm_org: "",
       descrip_comnt_frm_org_fac_advsr: "",
       status_perfomance: [],
       radio_perf_temp_1: [],
       comment_perf_temp_1: [],
       perfom_atrribure_1: [],
-      status_habbits: [],
       radio_perf_temp_2: [],
       comment_perf_temp_2: [],
       perfom_atrribure_2: [],
       work_habbit_obj: [{}],
-      perm_obj: [{}]
+      perm_obj: [{}],
+      obj_perfrormance: [],
+      obj_work_habbit: [],
+      data_insert_message: 'fsdfs',
+      data_insert_status: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.testman = this.testman.bind(this);
-    // this.handleChange_text_normal = this.handleChange_text_normal.bind(this);
+    this.handle_nested_tables = this.handle_nested_tables.bind(this);
+    this.Fill_supervisor_form_i5 = this.Fill_supervisor_form_i5.bind(this);
+    this.radio_overall_perfomance = this.radio_overall_perfomance.bind(this);
+
+    this.toggle = this.toggle.bind(this);
   }
+
+
   componentDidMount() {
     this.setState({ perfom_atrribure_1: stud_perfomance });
     this.setState({ perfom_atrribure_2: wrk_hbts });
   }
-  testman() {
-    this.state.perm_obj.push(
+  async handle_nested_tables() {
+    await this.state.perm_obj.push(
       this.state.perfom_atrribure_1,
       this.state.radio_perf_temp_1,
       this.state.comment_perf_temp_1
     );
-    this.state.work_habbit_obj.push(
+    await this.state.work_habbit_obj.push(
       this.state.perfom_atrribure_2,
       this.state.radio_perf_temp_2,
       this.state.comment_perf_temp_2
     );
 
-    console.log(
-      this.state.perm_obj[1][0],
-      this.state.perm_obj[2][0],
-      this.state.perm_obj[3][0]
-    );
-    console.log(
-      this.state.perm_obj[1][1],
-      this.state.perm_obj[2][1],
-      this.state.perm_obj[3][1]
-    );
+    for (var i = 0; i < this.state.perfom_atrribure_1.length; i++) {
+      this.state.obj_perfrormance.push({
+        category: this.state.perm_obj[1][i],
+        status: this.state.perm_obj[2][i],
+        comment: this.state.perm_obj[3][i]
+      });
 
-    console.log(
-      this.state.work_habbit_obj[1][0],
-      this.state.work_habbit_obj[2][0],
-      this.state.work_habbit_obj[3][0]
-    );
-    console.log(
-      this.state.work_habbit_obj[1][1],
-      this.state.work_habbit_obj[2][1],
-      this.state.work_habbit_obj[3][1]
-    );
+      if (i > 7) {
+
+      } else {
+        this.state.obj_work_habbit.push({
+          category: this.state.work_habbit_obj[1][i],
+          status: this.state.work_habbit_obj[2][i],
+          comment: this.state.work_habbit_obj[3][i]
+        });
+      }
+    }
+  }
+
+  async Fill_supervisor_form_i5() {
+    await this.handle_nested_tables();
+
+    var self = this;
+    axios
+      .post("/fill-formI5_supervisor", {
+        studentID: this.state.studentID,
+        student_name: this.state.student_name,
+        employer_name: this.state.empName,
+        supervisor_name: this.state.supervisorName,
+        descrip_work_diff: this.state.descrip_work_diff,
+        student_performance: this.state.obj_perfrormance,
+        student_work_habits: this.state.obj_work_habbit,
+        descrip_positive_pc: this.state.descrip_positive_pc,
+        descrip_pc_hep_pd: this.state.descrip_pc_hep_pd,
+        descrip_effective_for_org_intern: this.state
+          .descrip_effective_for_org_intern,
+        descrip_sugst_ip: this.state.descrip_sugst_ip,
+        descrip_comnt_frm_org: this.state.descrip_comnt_frm_org,
+        descrip_comnt_frm_org_fac_advsr: this.state
+          .descrip_comnt_frm_org_fac_advsr,
+        overall_perf: this.state.overall_perf
+
+      })
+      .then( function (res) {
+
+        alert( res.data.message)
+        // self.setState({ data_insert_message: res.data.message });
+        // self.setState({ data_insert_status: true });
+        console.log(res.data.message);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   handleChange(event) {
@@ -94,9 +147,14 @@ class Supervisor_i5 extends React.Component {
     this.setState({ comment_perf_temp_2: a });
   }
   onSelectChange(event) {
-    this.setState({ student: event.target.value });
+    this.setState({ student_name: event.target.value });
   }
-
+  //toggling message box
+  toggle() {
+    this.setState({
+      modal: this.state.data_insert_status
+    });
+  }
   // for student performance radio button data extraction
   radio_std_perform(index, event) {
     let a = this.state.radio_perf_temp_1.slice();
@@ -124,13 +182,42 @@ class Supervisor_i5 extends React.Component {
     }
     this.setState({ radio_perf_temp_2: a });
   }
-
+  //for overall performance of student
+  radio_overall_perfomance(event) {
+    var temp;
+    if (event.target.value === "Outstanding") {
+      temp = "Outstanding";
+      // this.setState({ overall_perf: "Outstanding" });
+    } else if (event.target.value === "Very Good") {
+      // this.setState({ overall_perf: "Very Good" });
+      temp = "Very Good";
+    } else if (event.target.value === "Good") {
+      // this.setState({ overall_perf: "Good" });
+      temp = "Good";
+    } else if (event.target.value === "Marginal") {
+      // this.setState({ overall_perf: "Marginal" });
+      temp = "Marginal";
+    } else if (event.target.value === "Unsatisfactory") {
+      // this.setState({ overall_perf: "Unsatisfactory" });
+      temp = "Unsatisfactory";
+    }
+    this.setState({ overall_perf: temp });
+  }
   render() {
     return (
       <div>
         <PanelHeader size="sm" />
         <div className="content">
           {/* ********************** Row one *********************** */}
+          <Modal isOpen={this.state.data_insert_status} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalBody>
+              <h7>{this.state.data_insert_message}</h7>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={!this.state.data_insert_status}>Okay</Button>{' '}
+            </ModalFooter>
+          </Modal>
           <Row>
             <Col md={8} xs={12}>
               <Card>
@@ -144,10 +231,10 @@ class Supervisor_i5 extends React.Component {
                         <Label for="exampleSelect">Select Student</Label>
                         <Input
                           type="select"
-                          name="student"
+                          name="student_name"
                           id="exampleSelect"
                           onChange={this.onSelectChange.bind(this)}
-                          value={this.state.student}
+                          value={this.state.student_name}
                         >
                           <option value="">Select Student</option>
                           <option value="Nadun">Nadun Sirimevan</option>
@@ -169,6 +256,8 @@ class Supervisor_i5 extends React.Component {
                             type="text"
                             name="empName"
                             placeholder="Employer Name"
+                            value={this.state.empName}
+                            onChange={this.handleChange}
                             disabled
                           />
                         </Col>
@@ -183,6 +272,8 @@ class Supervisor_i5 extends React.Component {
                             name="supervisorName"
                             placeholder="Supervisor Name"
                             disabled
+                            value={this.state.supervisorName}
+                            onChange={this.handleChange}
                           />
                         </Col>
                       </FormGroup>
@@ -206,7 +297,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -303,9 +394,7 @@ class Supervisor_i5 extends React.Component {
                         </Form>
                       );
                     })}
-                    <Button color="info" size="lg" onClick={this.testman}>
-                      test
-                    </Button>
+
                     {/* --------------------------------------------------------------------------------------------------------------------- */}
                   </CardBody>
                 </div>
@@ -408,7 +497,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -440,7 +529,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -448,6 +537,40 @@ class Supervisor_i5 extends React.Component {
                               name="descrip_pc_hep_pd"
                               placeholder="Enter here"
                               value={this.state.descrip_pc_hep_pd}
+                              onChange={this.handleChange}
+                            />
+                          </Col>
+                        </FormGroup>
+                      </Form>
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          {/* ********************** Row x *********************** */}
+          <Row>
+            <Col md={12} xs={12}>
+              <Card>
+                <div className="card-content">
+                  <CardHeader>
+                    <h5 className="title">
+                      How effective has the Internship Program been in meeting
+                      the needs of your organization?
+                    </h5>
+                  </CardHeader>
+                  <CardBody>
+                    <div className="card-content">
+                      <Form>
+                        <FormGroup className="card-content">
+                          <Col sm={10}>
+                            <Input
+                              type="textarea"
+                              name="descrip_effective_for_org_intern"
+                              placeholder="Enter here"
+                              value={
+                                this.state.descrip_effective_for_org_intern
+                              }
                               onChange={this.handleChange}
                             />
                           </Col>
@@ -472,7 +595,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -506,7 +629,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -538,7 +661,7 @@ class Supervisor_i5 extends React.Component {
                   </CardHeader>
                   <CardBody>
                     <div className="card-content">
-                      <Form row>
+                      <Form>
                         <FormGroup className="card-content">
                           <Col sm={10}>
                             <Input
@@ -575,8 +698,9 @@ class Supervisor_i5 extends React.Component {
                             <Label check>
                               <Input
                                 type="radio"
-                                name="radio1"
+                                name="radio3"
                                 value="Outstanding"
+                                onChange={this.radio_overall_perfomance}
                               />{" "}
                               Outstanding
                             </Label>
@@ -585,19 +709,54 @@ class Supervisor_i5 extends React.Component {
                             <Label check>
                               <Input
                                 type="radio"
-                                name="radio1"
+                                name="radio3"
                                 value="Very Good"
+                                onChange={this.radio_overall_perfomance}
                               />{" "}
                               Very Good
                             </Label>
                           </FormGroup>
                           <FormGroup check>
                             <Label check>
-                              <Input type="radio" name="radio1" value="Good" />{" "}
+                              <Input
+                                type="radio"
+                                name="radio3"
+                                value="Good"
+                                onChange={this.radio_overall_perfomance}
+                              />{" "}
                               Good
                             </Label>
                           </FormGroup>
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="radio"
+                                name="radio3"
+                                value="Marginal"
+                                onChange={this.radio_overall_perfomance}
+                              />{" "}
+                              Marginal
+                            </Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Label check>
+                              <Input
+                                type="radio"
+                                name="radio3"
+                                value="Unsatisfactory"
+                                onChange={this.radio_overall_perfomance}
+                              />{" "}
+                              Unsatisfactory
+                            </Label>
+                          </FormGroup>
                         </Form>
+                        <Button
+                          color="info"
+                          size="lg"
+                          onClick={this.Fill_supervisor_form_i5}
+                        >
+                          Save Form
+                        </Button>
                       </Col>
                     </div>
                   </CardBody>
