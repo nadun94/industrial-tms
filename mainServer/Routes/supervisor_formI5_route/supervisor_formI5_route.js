@@ -4,6 +4,7 @@ module.exports = (app)=>{
     //Add form i5 details to the database by supervisor
     app.route('/fill-formI5_supervisor')
     .post((req,res)=>{
+        console.log(req.body)
         SupervisorFormI5.insertFormi5(req.body) 
         .then((data)=>{
             // res.status(data.status).send({message:data.message})

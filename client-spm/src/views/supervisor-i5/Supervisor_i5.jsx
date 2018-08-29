@@ -1,16 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Row,
-  Col,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
-import { Button, Form, FormGroup, Label, Input, Radio } from "reactstrap";
+import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
 import axios from "axios";
 import { stud_perfomance, wrk_hbts } from "../../variables/var_i5";
@@ -44,7 +34,7 @@ class Supervisor_i5 extends React.Component {
       perm_obj: [{}],
       obj_perfrormance: [],
       obj_work_habbit: [],
-      data_insert_message: 'fsdfs',
+      data_insert_message: "fsdfs",
       data_insert_status: false
     };
 
@@ -56,7 +46,6 @@ class Supervisor_i5 extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-
 
   componentDidMount() {
     this.setState({ perfom_atrribure_1: stud_perfomance });
@@ -82,7 +71,6 @@ class Supervisor_i5 extends React.Component {
       });
 
       if (i > 7) {
-
       } else {
         this.state.obj_work_habbit.push({
           category: this.state.work_habbit_obj[1][i],
@@ -115,16 +103,14 @@ class Supervisor_i5 extends React.Component {
         descrip_comnt_frm_org_fac_advsr: this.state
           .descrip_comnt_frm_org_fac_advsr,
         overall_perf: this.state.overall_perf
-
       })
-      .then( function (res) {
-
-        alert( res.data.message)
+      .then(function(res) {
+        alert(res.data.message);
         // self.setState({ data_insert_message: res.data.message });
         // self.setState({ data_insert_status: true });
         console.log(res.data.message);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }
@@ -209,15 +195,7 @@ class Supervisor_i5 extends React.Component {
         <PanelHeader size="sm" />
         <div className="content">
           {/* ********************** Row one *********************** */}
-          <Modal isOpen={this.state.data_insert_status} toggle={this.toggle} className={this.props.className}>
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-            <ModalBody>
-              <h7>{this.state.data_insert_message}</h7>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={!this.state.data_insert_status}>Okay</Button>{' '}
-            </ModalFooter>
-          </Modal>
+
           <Row>
             <Col md={8} xs={12}>
               <Card>
@@ -292,7 +270,6 @@ class Supervisor_i5 extends React.Component {
                     <h5 className="title">
                       Describe the differences, if any, between student's
                       initial contract and actual assignment which developed
-                      {this.state.descrip_work_diff}
                     </h5>
                   </CardHeader>
                   <CardBody>

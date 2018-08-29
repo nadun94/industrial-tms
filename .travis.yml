@@ -1,0 +1,11 @@
+git:
+  depth: 3
+on:
+    branch: master
+  except:
+  - docs
+language: node_js
+node_js:
+  - "node"
+script:
+  - npm run build

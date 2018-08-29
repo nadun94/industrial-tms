@@ -56,5 +56,4 @@
     "prettier": "^1.13.7"
   },
   "proxy":"http://localhost:4000"
-
 }
