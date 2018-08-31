@@ -12,7 +12,7 @@ class AssignStudentSupervisorUI extends React.Component {
             student_list: [],
             supervisor_list:[],
             studentId:null,
-            supervisorId:null,
+            supervisorId:22,
             studentName: null,
             supervisorName: null,
             assignId:null,
@@ -125,17 +125,14 @@ class AssignStudentSupervisorUI extends React.Component {
                                             <FormGroup>
                                                 <Label for="exampleSelect">Select Student ID</Label>
                                                 <Input
-                                                    type="select"
+                                                    type="text"
                                                     name="student"
                                                     id="selectStudent"
-                                                    onChange={this.onSelectChange.bind(this)}
-                                                    value={this.state.studentId}
+                                                   // onChange={this.onSelectChange.bind(this)}
+                                                    //value={this.state.studentId}
                                                 >
                                                     {this.state.studentId}
-                                                    <option value="">Select Student</option>
-                                                    <option value="Nadun">Nadun Sirimevan</option>
-                                                    <option value="Mia">Mia</option>
-                                                </Input>
+                                                    </Input>
                                                 <br />
                                                 <Button color="info" size="lg">
                                                     View Student Details
@@ -223,15 +220,13 @@ class AssignStudentSupervisorUI extends React.Component {
                                             <FormGroup>
                                                 <Label for="exampleSelect">Select Supervisor ID</Label>
                                                 <Input
-                                                    type="select"
+                                                    type="text"
                                                     name="supervisor"
                                                     id="selectSupervisor"
-                                                    onChange={this.onSupervisorSelectChange.bind(this)}
+                                                    //onChange={this.onSupervisorSelectChange.bind(this)}
                                                     value={this.state.supervisorId}
                                                 >
-                                                    <option value="">Select Supervisor</option>
-                                                    <option value="Nadun">Nadun Sirimevan</option>
-                                                    <option value="Mia">Mia</option>
+
                                                 </Input>
                                                 <br />
                                                 <Button color="info" size="lg">
@@ -294,12 +289,11 @@ class AssignStudentSupervisorUI extends React.Component {
                                         <h5 className="title">Assign Supervisor</h5>
                                     </CardHeader>
                                     <CardBody>
-                                        <Form>
-                                            <FormGroup>
-                                                <Table responsive>
+
+
+                                                <Table>
                                                     <thead>
                                                     <tr>
-                                                        <th>#</th>
                                                         <th>Assign ID</th>
                                                         <th>StudentID</th>
                                                         <th>SupervisorID</th>
@@ -308,35 +302,52 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     <tbody>
 
                                                     <tr>
-                                                        <th>1</th>
-                                                        <td><Input
-                                                            type="text"
-                                                            name="assignId"
-                                                            id="assignId"
-                                                            value={this.state.assignId}
-                                                        >
-                                                            {this.state.supervisorId}
+                                                        <td><FormInputs
+                                                            ncols={["col-md-12 pr-1"]}
+                                                            proprieties={[
+                                                                {
 
-                                                        </Input></td>
+                                                                    inputProps: {
+                                                                        type: "text",
 
-                                                        <td><Input
-                                                            type="text"
-                                                            name="student"
-                                                            id="studentId"
-                                                            value={this.state.studentId}
-                                                        >
-                                                            {this.state.studentId}
-                                                        </Input></td>
+                                                                        name: "assignId",
 
-                                                        <td><Input
-                                                            type="text"
-                                                            name="supervisorId"
-                                                            id="supervisorId"
-                                                            value={this.state.supervisorId}
-                                                        >
-                                                            {this.state.supervisorId}
 
-                                                        </Input></td>
+                                                                    }
+                                                                }
+                                                            ]}
+                                                        /></td>
+
+                                                        <td><FormInputs
+                                                            ncols={["col-md-12 pr-1"]}
+                                                            proprieties={[
+                                                                {
+
+                                                                    inputProps: {
+                                                                        type: "text",
+                                                                        placeholder: "",
+                                                                        name: "studentId",
+
+
+                                                                    }
+                                                                }
+                                                            ]}
+                                                        /></td>
+
+                                                        <td><FormInputs
+                                                            ncols={["col-md-12 pr-1"]}
+                                                            proprieties={[
+                                                                {
+
+                                                                    inputProps: {
+                                                                        type: "text",
+                                                                        placeholder: "",
+                                                                        name: "supervisorId",
+
+                                                                    }
+                                                                }
+                                                            ]}
+                                                        /></td>
 
                                                         </tr>
                                                     </tbody>
@@ -346,10 +357,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Button color="info" size="lg" onClick={this.addDetails}>
                                                     Assign Student Supervisor
                                                 </Button>
-                                            </FormGroup>
-                                        </Form>
-                                        <Form inline>
-                                    </Form>
+
+
+
                                     </CardBody>
                                 </div>
                         </Card>

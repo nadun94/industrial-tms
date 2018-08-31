@@ -39,7 +39,8 @@ db.sequelize = sequelize;
 
   //IT16122192(rakshitha)employeeadd
 
-  require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+    require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
 
 
   //Connection to the Mogodb
