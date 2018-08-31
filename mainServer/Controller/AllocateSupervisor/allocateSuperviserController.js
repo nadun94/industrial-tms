@@ -12,14 +12,13 @@ module.exports = function (app, Sequelize, sequelize, db)
 
     app.route('/getstudent/:para')
         .get((req, res) => {
-            console.log(req.params.para);
-            db.studentDetails.find({
+            //console.log(req.params.para);
+            db.studentDetails2.findAll({
             }).then(data => {
 
                 res.send(JSON.stringify({
                     "stdid": data.stdid,"name":data.name,"email":data.email,"mobilephone":data.mobilephone,
                     "semester":data.semester,"gpa":data.gpa,
-                    "company":data.company,"intern_position":data.intern_position
 
                 }))
             })
@@ -27,7 +26,7 @@ module.exports = function (app, Sequelize, sequelize, db)
 
     app.route('/getsupervisor/:para')
         .get((req, res) => {
-            console.log(req.params.para);
+            ///console.log(req.params.para);
             db.supervisorDetails.find({
             }).then(data => {
 
@@ -41,12 +40,12 @@ module.exports = function (app, Sequelize, sequelize, db)
 
     app.route('/getallstudentlist')
         .get((req, res) => {
-            console.log(req.params.para);
-            db.studentDetails.findAll({
-            }).then(data => {
-
+            //console.log(req.params.para);
+            db.studentDetails2.find({
+            },{ projection: { studentID:0} }).then(data => {
+                console.log(data.studentID);
                 res.send(JSON.stringify({
-                    "stdid": data.stdid
+                    "studentID:": data.studentID
 
                 }))
             })
@@ -55,9 +54,10 @@ module.exports = function (app, Sequelize, sequelize, db)
 
     app.route('/getallsupervisorslist')
         .get((req, res) => {
-            console.log(req.params.para);
+            //npm startconsole.log(req.params.para);
             db.supervisorDetails.findAll({
             }).then(data => {
+                console.log(data);
 
                 res.send(JSON.stringify({
                     "supervisorId": data.supervisorId, "supervisername": data.supervisorId
@@ -72,8 +72,7 @@ module.exports = function (app, Sequelize, sequelize, db)
                 assignId:req.body.assignId,
                 studentId:req.body.studentId,
                 supervisorId:req.body.supervisorId,
-                studentName:req.body.studentName,
-                supervisorName:req.body.supervisorName,
+
                 }).then(newSuperallocate => {
                     console.log(newSuperallocate)
                     res.send(JSON.stringify({

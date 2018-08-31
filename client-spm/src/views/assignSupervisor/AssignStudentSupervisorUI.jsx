@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, Radio,Table } from "reactstrap";
 import { PanelHeader, FormInputs } from "components";
-
+import axios from 'axios';
 import { stud_perfomance, wrk_hbts } from "../../variables/var_i5";
 class AssignStudentSupervisorUI extends React.Component {
     constructor(props) {
@@ -15,6 +15,7 @@ class AssignStudentSupervisorUI extends React.Component {
             supervisorId:null,
             studentName: null,
             supervisorName: null,
+            assignId:null,
             opt1:''
 
 
@@ -24,7 +25,34 @@ class AssignStudentSupervisorUI extends React.Component {
         // this.handleChange = this.handleChange.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onSupervisorSelectChange=this.onSupervisorSelectChange.bind(this);
+        this.addDetails=this.addDetails.bind(this);
     }
+
+    addDetails() {
+
+
+
+        var self = this;
+        console.log("axios");
+
+        axios.post("/assignsupervisor", {
+
+            studentId: this.state.studentId,
+            supervisorId: this.state.supervisorId,
+            assignId:this.state.assignId
+
+
+        })
+            .then(res => {
+                this.setState({ message: res.data.message })
+
+                console.log(res);
+                console.log(res.data);
+                console.log("saved!")
+
+            })
+    }
+
 
     onSelectChange(event) {
         this.setState({ studentId: event.target.value });
@@ -32,6 +60,7 @@ class AssignStudentSupervisorUI extends React.Component {
     onSupervisorSelectChange(event) {
         this.setState({ supervisorId: event.target.value });
     }
+
 //***************************
     componentDidMount(){
 
@@ -39,7 +68,9 @@ class AssignStudentSupervisorUI extends React.Component {
         fetch('/getallstudentlist')
             .then(res => res.json())
             .then(data => {
-                self.setState({ student_list: data["stdid"] })
+                console.log(data);
+                self.setState({ student_list: data["studentID:"] })
+                console.log(this.state.student_list);
             })
             .catch((err) => {
                 console.log(err)
@@ -100,7 +131,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     onChange={this.onSelectChange.bind(this)}
                                                     value={this.state.studentId}
                                                 >
-                                                    {/*this.state.studentId*/}
+                                                    {this.state.studentId}
                                                     <option value="">Select Student</option>
                                                     <option value="Nadun">Nadun Sirimevan</option>
                                                     <option value="Mia">Mia</option>
@@ -269,6 +300,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     <thead>
                                                     <tr>
                                                         <th>#</th>
+                                                        <th>Assign ID</th>
                                                         <th>StudentID</th>
                                                         <th>SupervisorID</th>
                                                     </tr>
@@ -276,44 +308,48 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     <tbody>
 
                                                     <tr>
-                                                        <th scope="row">1</th>
+                                                        <th>1</th>
                                                         <td><Input
-                                                            type="select"
+                                                            type="text"
+                                                            name="assignId"
+                                                            id="assignId"
+                                                            value={this.state.assignId}
+                                                        >
+                                                            {this.state.supervisorId}
+
+                                                        </Input></td>
+
+                                                        <td><Input
+                                                            type="text"
                                                             name="student"
-                                                            id="selectStudent"
-                                                            onChange={this.onSelectChange.bind(this)}
+                                                            id="studentId"
                                                             value={this.state.studentId}
                                                         >
                                                             {this.state.studentId}
                                                         </Input></td>
 
                                                         <td><Input
-                                                            type="select"
-                                                            name="student"
-                                                            id="selectStudent"
-                                                            onChange={this.onSelectChange.bind(this)}
+                                                            type="text"
+                                                            name="supervisorId"
+                                                            id="supervisorId"
                                                             value={this.state.supervisorId}
                                                         >
                                                             {this.state.supervisorId}
 
                                                         </Input></td>
+
                                                         </tr>
                                                     </tbody>
                                                 </Table>
 
                                                 <br />
-                                                <Button color="info" size="lg">
+                                                <Button color="info" size="lg" onClick={this.addDetails}>
                                                     Assign Student Supervisor
                                                 </Button>
                                             </FormGroup>
                                         </Form>
                                         <Form inline>
-
-
-
-
-
-                                        </Form>
+                                    </Form>
                                     </CardBody>
                                 </div>
                         </Card>
