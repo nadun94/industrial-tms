@@ -1,11 +1,18 @@
-git:
-  depth: 3
-on:
-    branch: master
-  except:
-  - docs
 language: node_js
 node_js:
-  - "node"
-script:
-  - npm run build
+- stable
+cache:
+  directories:
+  - node_modules
+notifications:
+  email:
+  - nadunsirimevan@gmail.com
+  on_success: always
+  on_failure: always
+deploy:
+  provider: heroku
+  api_key:
+    secure: fRxmnnY39aYC8nK8ISY2+AcqLWpJI/XQadW3J6a5WABCr/QjrBxnzGZtq/oAUSFqeWdO8jt8RjZYsO34DGO9EalplsnIyMxQgg6ZMZVDJxw+u65EFrkzH0DcQzEqmr2e60+46nUwc12+cKh7LaGkrd5pyl2U+rXrmYE9XXdnRzaH+CXnZiLvdO4fGN++bcSXQX8BrNPaEHtEuzbQf7eV1uL9Wi+Xu3P56yNZe677cTlMpJnGcGUMzCoroudxZbRxzt4gkvxH33koeolPS+ku5+hhTfTwjXiqCENrsZeuc30xPSH5wmIC9/p5cQo4kkMKsG8vEykdbfkr4A5GaFWYXTTZlZkinuyINzrLQR6C0eIyoSFR3DNdJ/GC6nkFS3wQTZnPl2Pv/dcpPQkXtkxuCEc+pFZt05JslKqLy5OmH+ovyP+ulGD8aKLKOVwO7IoOR49iUTV3S9jw1DMMrD63YCwJZagoskUwiMc1iQ/0AH/ojNTzjXdJpoRBbz3Uuw9Qrqw2FFP1UsoilwjOQ/s0LQCrzhWcsRgbOn8E26lhYHKEvKwOpqYN4JhsrmkHMu23ziNZbKijHkqwVMDK8wuVMgCuTOsMOS4KREbgjLbKJDHPhjZs1zA8wmjBOQ3BT2apvRZ/+5KQHxYCJxPdvWOs1/wV5/SVL1S7zr3izPKwO20=
+  app:
+    production: ancient-wave-73156
+
