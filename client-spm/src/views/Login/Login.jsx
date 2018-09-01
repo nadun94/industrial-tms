@@ -17,7 +17,7 @@ export default class Login extends Component {
       name: null,
       show_error_login: false,
       loading: false,
-      message:''
+      message: ""
     };
     this.processLog = this.processLog.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -26,21 +26,20 @@ export default class Login extends Component {
   processLog() {
     this.setState({ loading: true });
     var self = this;
+
     axios
       .post("/login", {
         username: this.state.username,
         password: this.state.password
       })
       .then(function(res) {
-        console.log(res.data)
         if (res.data.auth === true) {
           self.setState({ loading: false });
-          self.setState({message:res.data.message})
+          self.setState({ message: res.data.message });
           sessionStorage.setItem("loging_status", res.data.auth);
           sessionStorage.setItem("user", res.data.user.username);
-          console.log(res.data.user)
           self.setState({ show_error_login: false });
-          // window.location.reload();
+          window.location.reload();
         } else {
           self.setState({ loading: false });
           self.setState({ show_error_login: true });
@@ -56,7 +55,6 @@ export default class Login extends Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-
 
   handleSubmit = event => {
     event.preventDefault();
@@ -110,7 +108,6 @@ export default class Login extends Component {
                     bsSize="large"
                     block
                     onClick={this.processLog}
-                    type="submit"
                   >
                     Login
                   </Button>
