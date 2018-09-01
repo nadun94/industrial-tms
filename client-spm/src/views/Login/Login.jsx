@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-// import { FormGroup, FormControl, Button } from "react-bootstrap";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "../../assets/css/Login.css";
 import CogIcon from "react-icons/lib/fa/cogs";
-// import { Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import { PropagateLoader } from "react-spinners";
 import "../../assets/css/tasks.css";
@@ -18,34 +16,34 @@ export default class Login extends Component {
       loging_status: null,
       name: null,
       show_error_login: false,
-      loading: false
+      loading: false,
+      message:''
     };
     this.processLog = this.processLog.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   processLog() {
-    this.handleattributes({ loading: true });
+    this.setState({ loading: true });
     var self = this;
     axios
       .post("/login", {
         username: this.state.username,
-        pwd: this.state.password
+        password: this.state.password
       })
       .then(function(res) {
-        if (res.data.token != null) {
-          self.handleattributes({ loading: false });
-          sessionStorage.setItem("loging_status", res.data.loging_status);
-          sessionStorage.setItem("token", res.data.token);
-          sessionStorage.setItem("user", res.data.user);
-          sessionStorage.setItem("username", res.data.username);
-          self.handleattributes({ show_error_login: false });
-          window.location.reload();
-          let token = res.data.token;
-          self.handleattributes({ token: token });
+        console.log(res.data)
+        if (res.data.auth === true) {
+          self.setState({ loading: false });
+          self.setState({message:res.data.message})
+          sessionStorage.setItem("loging_status", res.data.auth);
+          sessionStorage.setItem("user", res.data.user.username);
+          console.log(res.data.user)
+          self.setState({ show_error_login: false });
+          // window.location.reload();
         } else {
-          self.handleattributes({ loading: false });
-          self.handleattributes({ show_error_login: true });
+          self.setState({ loading: false });
+          self.setState({ show_error_login: true });
         }
       })
       .catch(function(error) {
@@ -55,16 +53,10 @@ export default class Login extends Component {
   validateForm() {
     return this.state.username.length > 0 && this.state.password.length > 0;
   }
-  handleChange({ target }) {
-    this.handleattributes({
-      [target.id]: target.value
-    });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.id]: event.target.value
-  //   });
-  // };
+
 
   handleSubmit = event => {
     event.preventDefault();
@@ -124,7 +116,7 @@ export default class Login extends Component {
                   </Button>
 
                   {this.state.show_error_login && (
-                    <h3 className="login-error">Invalid Credentials</h3>
+                    <h3 className="login-error">{this.state.message}</h3>
                   )}
                 </FormGroup>
               </div>

@@ -11,15 +11,35 @@ import indexRoutes from "routes/index.jsx";
 
 const hist = createBrowserHistory();
 
+function checkLogin() {
+  if (sessionStorage.getItem("loging_status")) {
+    return (
+      <div>
+        {/* <Route path="/" component={Dashboard} />
+       */}
+        {indexRoutes.map((prop, key) => {
+          return (
+           <div>
+              <Redirect to="/login" />
+            <Route path={prop.path} key={key} component={prop.component} />
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Redirect to="/login" />
+        <Route path="/login" component={Login} />
+      </div>
+    );
+  }
+}
+
 ReactDOM.render(
   <Router history={hist}>
-    <Switch>
-      {indexRoutes.map((prop, key) => {
-        return <Route path={prop.path} key={key} component={prop.component} />;
-      })}
-      {/* <Redirect to="/login" /> */}
-     {/* <Route path="/login" component={Login} /> */}
-    </Switch>
+    <Switch>{checkLogin()}</Switch>
   </Router>,
   document.getElementById("root")
 );

@@ -3,6 +3,7 @@ import { Card, CardHeader, CardBody, Row, Col, ButtonGroup } from "reactstrap";
 
 import { Button } from 'reactstrap';
 import axios from 'axios';
+import { Badge } from 'reactstrap';
 
 import { PanelHeader, FormInputs } from "components";
 //import { Button } from 'reactstrap';
@@ -20,6 +21,7 @@ class fillform_1 extends React.Component {
             semester: null,
             gpa: null,
             cgpa: null,
+            message:"",
            
 
         };
@@ -28,6 +30,7 @@ class fillform_1 extends React.Component {
         this.clear=this.clear.bind(this);
        // this.check=this.check.bind(this);
         this.addDetails=this.addDetails.bind(this);
+        this.checkerror=this.checkerror.bind(this);
 
     }
     componentWillMount(){
@@ -48,9 +51,15 @@ class fillform_1 extends React.Component {
             semester: "",
             gpa: "",
             cgpa: "",
+           message:""
         })
         console.log("clear");
         
+    }
+    checkerror(){
+     console.log(this.state.message);
+
+
     }
     addDetails() {
 
@@ -80,13 +89,21 @@ class fillform_1 extends React.Component {
 
         })
             .then(res => {
-                this.setState({ message: res.data.message })
+              console.log("jgyug");
+                this.setState({ message: res.data.message });
+                //console.log(res.data.message);
 
-                console.log(res);
-                console.log(res.data);
-                console.log("saved!")
+              //  console.log(res);
+               // console.log(res.data);
+               //console.log(this.checkerror());
+               console.log(res.message);
+               console.log(this.state.message);
+                console.log("saved!");
+
+               // this.clear()
                
             })
+            
     }
 
  
@@ -253,9 +270,11 @@ class fillform_1 extends React.Component {
                       
                     />
                     <ButtonGroup className="pull-right">
-                     <Button color="primary" size="lg" onClick={this.addDetails} >SAVE</Button>{' '}
-                     <Button color="secondary" size="lg" onClick={this.clear} >CLEAR</Button>
+                     <Button color="primary" size="lg"  onClick={this.addDetails} >SAVE</Button>{' '}
+                     <Button color="secondary" size="lg" onClick={this.clear}  >CLEAR</Button>
                      </ButtonGroup>
+                    
+                     <h3> <Badge color="secondary">{this.state.message}</Badge></h3>
                       
                
                     

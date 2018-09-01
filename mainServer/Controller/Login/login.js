@@ -31,12 +31,12 @@ module.exports = function (app, Sequelize, sequelize, db) {
                                         "user": null
                                     }))
                                 } else {
-                                    console.log("Date: ",result)
+                                    console.log("Date: ",result[0]['dataValues'])
                                     res.send(JSON.stringify({
                                         "Error_status": 200,
                                         "auth":true,
                                         "error": null,
-                                        "user": result
+                                        "user": result[0]['dataValues']
                                     }))
                                 }
                             }).catch((err) => {
