@@ -10,7 +10,6 @@ client-spm/node_modules
 client-spm/coverage
 
 # production
-client-spm/build
 client-spm/dist
 
 # misc
