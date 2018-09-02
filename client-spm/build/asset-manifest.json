@@ -1,12 +1,15 @@
 {
-  "main.css": "static/css/main.da74f40e.css",
-  "main.css.map": "static/css/main.da74f40e.css.map",
-  "main.js": "static/js/main.6cb91428.js",
-  "main.js.map": "static/js/main.6cb91428.js.map",
+  "main.css": "static/css/main.26db87c0.css",
+  "main.css.map": "static/css/main.26db87c0.css.map",
+  "main.js": "static/js/main.91a27639.js",
+  "main.js.map": "static/js/main.91a27639.js.map",
+  "static\\media\\1.jpg": "static/media/1.cca2f58b.jpg",
   "static\\media\\cesar-couto-423267-unsplash.jpg": "static/media/cesar-couto-423267-unsplash.b8731b73.jpg",
   "static\\media\\logo-white.svg": "static/media/logo-white.eec7c7f6.svg",
   "static\\media\\nucleo-outline.eot": "static/media/nucleo-outline.53a1bed7.eot",
   "static\\media\\nucleo-outline.ttf": "static/media/nucleo-outline.22a0bffe.ttf",
   "static\\media\\nucleo-outline.woff": "static/media/nucleo-outline.24e2d6b4.woff",
-  "static\\media\\nucleo-outline.woff2": "static/media/nucleo-outline.8ebec31f.woff2"
+  "static\\media\\nucleo-outline.woff2": "static/media/nucleo-outline.8ebec31f.woff2",
+  "static\\media\\p.png": "static/media/p.871aa151.png",
+  "static\\media\\s.jpg": "static/media/s.a9108999.jpg"
 }
