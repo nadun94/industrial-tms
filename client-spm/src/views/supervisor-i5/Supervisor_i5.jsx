@@ -96,6 +96,7 @@ class Supervisor_i5 extends React.Component {
     axios.get('/getemp&spvsr/' + this.state.student_name)
       .then(function (response) { 
         console.log(response);
+        
         // console.log(response.status); 
       });
   }
