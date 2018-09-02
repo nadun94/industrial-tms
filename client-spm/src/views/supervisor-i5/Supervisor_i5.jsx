@@ -35,7 +35,8 @@ class Supervisor_i5 extends React.Component {
       obj_perfrormance: [],
       obj_work_habbit: [],
       data_insert_message: "fsdfs",
-      data_insert_status: false
+      data_insert_status: false,
+      std: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,6 +44,10 @@ class Supervisor_i5 extends React.Component {
     this.handle_nested_tables = this.handle_nested_tables.bind(this);
     this.Fill_supervisor_form_i5 = this.Fill_supervisor_form_i5.bind(this);
     this.radio_overall_perfomance = this.radio_overall_perfomance.bind(this);
+    this.allStudents = this.allStudents.bind(this);
+    this.getcompany = this.getcompany.bind(this);
+
+
 
     this.toggle = this.toggle.bind(this);
   }
@@ -50,6 +55,49 @@ class Supervisor_i5 extends React.Component {
   componentDidMount() {
     this.setState({ perfom_atrribure_1: stud_perfomance });
     this.setState({ perfom_atrribure_2: wrk_hbts });
+    this.allStudents();
+  }
+  allStudents() {
+    var self = this;
+    fetch("/getallstd123")
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        self.setState({ std: data });
+        // self.state.std.push(data);
+        // self.state.std.map((item, key) => {
+        //   console.log(item);
+        // });
+        self.state.std.map(
+          (item, key) => {
+            console.log(item);
+          }
+          // <option value={std}>{std}</option>
+        );
+
+      })
+      .then(() => {
+        // for(let i=0;i<data.length;i++){
+        //   console.log(data[i])
+        // }
+        // self.state.std.map(
+        //   (item, key) => {
+        //     console.log(item);
+        //   }
+        // <option value={std}>{std}</option>
+        // );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  getcompany() {
+    axios.get('/getemp&spvsr/' + this.state.student_name)
+      .then(function (response) { 
+        console.log(response);
+        // console.log(response.status); 
+      });
   }
   async handle_nested_tables() {
     await this.state.perm_obj.push(
@@ -104,13 +152,13 @@ class Supervisor_i5 extends React.Component {
           .descrip_comnt_frm_org_fac_advsr,
         overall_perf: this.state.overall_perf
       })
-      .then(function(res) {
+      .then(function (res) {
         alert(res.data.message);
         // self.setState({ data_insert_message: res.data.message });
         // self.setState({ data_insert_status: true });
         console.log(res.data.message);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -215,11 +263,14 @@ class Supervisor_i5 extends React.Component {
                           value={this.state.student_name}
                         >
                           <option value="">Select Student</option>
-                          <option value="Nadun">Nadun Sirimevan</option>
-                          <option value="Mia">Mia</option>
+                          <option value="Nadun Sirimevan">Nadun Sirimevan</option>
+                          <option value="Kasun Perera">Kasun Perera</option>
+                          <option value="Mayuran">Mayuran</option>
+                          <option value="Chandira">Chandira</option>
                         </Input>
                         <br />
-                        <Button color="info" size="lg">
+                        <Button color="info" size="lg"
+                          onClick={this.getcompany()}>
                           Search
                         </Button>
                       </FormGroup>

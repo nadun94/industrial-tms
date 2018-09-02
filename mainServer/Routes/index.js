@@ -25,6 +25,7 @@ db.sequelize = sequelize;
 
   //require formI5 controller
   require('./supervisor_formI5_route/supervisor_formI5_route')(app)
+  require('../Controller/Supervisor_form_i5/I5STDSelection')(app, Sequelize, sequelize, db)
 
     require('../Controller/AllocateSupervisor/allocateSuperviserController.js')(app, Sequelize, sequelize, db)
 
