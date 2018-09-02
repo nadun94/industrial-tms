@@ -30,6 +30,7 @@ class Header extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
+    this.Logout= this.Logout.bind();
   }
   toggle() {
     if (this.state.isOpen) {
@@ -49,6 +50,10 @@ class Header extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+  Logout(){
+    sessionStorage.clear();
+        window.location.reload();
   }
   getBrand() {
     var name;
@@ -176,7 +181,7 @@ class Header extends React.Component {
               <br/>
               <br/>
               <br/>
-              <h7>Logout</h7>
+              <h7 onClick={this.Logout}>Logout</h7>
                 {/* <DropdownToggle caret nav>
                   <i className="now-ui-icons location_world" />
                   <p>

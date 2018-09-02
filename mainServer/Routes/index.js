@@ -37,8 +37,11 @@ db.sequelize = sequelize;
   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
   require('../Controller/Diaryview/Diaryview')(app, Sequelize, sequelize, db)
 
+  //create studemt first_form 1
 
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
+  require('./form_i6/form_i6_route')(app)
+
 
   //Connection to the Mogodb
   
