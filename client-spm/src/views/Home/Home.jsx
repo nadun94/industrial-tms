@@ -16,8 +16,8 @@ class Home extends React.Component {
             <Col xs={12} md={4}>
               <Card className="card-chart">
                 <CardHeader>
-                  <CardCategory>Industrial Training Unit</CardCategory>
-                  <CardTitle tag="h4">Internship program management</CardTitle>
+                  <CardCategory>Global Sales</CardCategory>
+                  <CardTitle tag="h4">Shipped Products</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">

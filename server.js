@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, 'client-spm/build')));
 
-require('./mainServer/Routes/index')(app)
+// require('./mainServer/Routes/index')(app)
 
 
 app.use('*', express.static(path.join(__dirname, 'client-spm/build')));
