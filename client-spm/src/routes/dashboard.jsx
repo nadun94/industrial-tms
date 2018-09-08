@@ -5,6 +5,7 @@ import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 import reg from "../views/Test/Test.jsx";
+import EmployeeReg from "../views/EmployeeReg/EmployeeReg.jsx";
 
 var dashRoutes = [
   {
@@ -42,6 +43,13 @@ var dashRoutes = [
     name: "Registration ****",
     icon: "files_paper",
     component: reg
+  },
+
+  {
+    path: "/EmployeeReg",
+    name: "Employee Resgister",
+    icon: "files_paper",
+    component: EmployeeReg
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
