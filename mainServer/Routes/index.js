@@ -20,13 +20,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
   //create user
-<<<<<<< HEAD
- 
-  require('../Controller/InternDiary/internalTrainingController')(app, Sequelize, sequelize, db)
- 
-
-  //Connection to the mysql datatabase
-=======
   require('../Controller/Login/login')(app, Sequelize, sequelize, db)
   require('../Controller/StdReg/StdRegCont')(app, Sequelize, sequelize, db)
 
@@ -36,19 +29,13 @@ db.sequelize = sequelize;
     require('../Controller/AllocateSupervisor/allocateSuperviserController.js')(app, Sequelize, sequelize, db)
 
     //Connection to the mysql datatabase
->>>>>>> 9980c6d33213a544794b3d1704d6b1746e883ed0
     // const Op = Sequelize.Op;
 
   //IT16122192(rakshitha)employeeadd
 
-<<<<<<< HEAD
- 
-
-=======
   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
 
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
->>>>>>> 9980c6d33213a544794b3d1704d6b1746e883ed0
 
   //Connection to the Mogodb
   
