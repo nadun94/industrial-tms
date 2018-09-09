@@ -34,6 +34,8 @@ db.sequelize = sequelize;
   //IT16122192(rakshitha)employeeadd
 
   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+  require('../Controller/Diaryview/Diaryview')(app, Sequelize, sequelize, db)
+
 
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
 

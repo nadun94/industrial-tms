@@ -6,6 +6,7 @@ import superi5 from "../views/supervisor-i5/Supervisor_i5";
 
 import reg from "../views/Test/Test.jsx";
 import EmployeeReg from "../views/EmployeeReg/EmployeeReg.jsx";
+import Diaryview from "../views/Diaryview/Diaryview.jsx";
 import student_form1 from "../views/stdform1-ys/fillform_1";
 
 var dashRoutes = [
@@ -51,6 +52,12 @@ var dashRoutes = [
     name: "Employee Resgister",
     icon: "files_paper",
     component: EmployeeReg
+  },
+   {
+    path: "/Diaryview",
+    name: "Diary View",
+    icon: "files_paper",
+    component:  Diaryview
   },
   {
     path: "/student_form",
