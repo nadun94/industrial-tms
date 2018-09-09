@@ -34,15 +34,18 @@ db.sequelize = sequelize;
   //IT16122192(rakshitha)employeeadd
 
   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
+  //create studemt first_form 1
 
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
+  require('./form_i6/form_i6_route')(app)
+
 
   //Connection to the Mogodb
   
-mongoose.connect('mongodb://localhost:27017/internship', (err) => {
-  if (err) {
-      console.log('Error connecting to mongodb')
-  }
-  console.log('MongoDB connection successfull')
-})
+  mongoose.connect('mongodb://root:1qaz2wsx@ds249942.mlab.com:49942/internship', (err) => {
+    if (err) {
+        console.log('Error connecting to mongodb')
+    }
+    console.log('MongoDB connection successfull')
+  })
 }

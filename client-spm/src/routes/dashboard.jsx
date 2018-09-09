@@ -1,6 +1,7 @@
 import Home from "views/Home/Home.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
 import student_form1 from "../views/stdform1-ys/fillform_1";
+import form6 from "../views/formi-6/form6";
 
 var dashRoutes = [
   {
@@ -20,6 +21,12 @@ var dashRoutes = [
     name: "student form first fill up",
     icon: "users_single-02",
     component: student_form1
+  },
+  {
+    path: "/fill-formI6",
+    name: "form I 6",
+    icon: "users_single-02",
+    component: form6
   },
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];

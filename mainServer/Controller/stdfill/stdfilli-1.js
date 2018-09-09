@@ -7,6 +7,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
     
     app.route('/studentform1')
         .post((req, res) => {
+            
 
             if(req.body.studentID==""||req.body.studentID==undefined){
                 res.send(JSON.stringify({
