@@ -4,7 +4,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
     db.stdregdet = require('../../Model/RegStudent')(sequelize, Sequelize)
     sequelize.sync();
 
-
+// Add students to the database.
     app.route('/stddetreg')
         .post((req, res) => {
             if(req.body.stdid==null || req.body.stdid==""){
@@ -66,6 +66,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
             
         })
 
+// Return all the students in the database.
         app.route('/getallstddetreg')
         .get((req, res) => {
             db.stdregdet.findAll({
@@ -77,6 +78,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
             })
         })
 
+// Get a specific student by either by student name or student id.
         app.route('/getallstddetreg/:para')
         .get((req, res) => {
             console.log(req.params.para);
@@ -104,5 +106,30 @@ module.exports = function (app, Sequelize, sequelize, db) {
                 }))
             })
         })
+
+        // Update details of a student when student id is given.
+        app.put('/update', function (req, res) {
+            console.log(res);
+            db.stdregdet.update({
+                address: req.body.address,
+                tel: req.body.tel,
+                company: req.body.company,
+                intern_position: req.body.intrnpos,
+                intern_duration: req.body.intrndur
+            },
+            {where: {stdid:req.body.stdid}}
+        ).then(data => {
+    
+            res.send(JSON.stringify({
+                "record": data,
+                'message': "Updates Successfully!!!!"
+            }))
+        }).catch((err) => {
+            console.log(err);
+            res.send(JSON.stringify({
+                'message': "Error"
+            }))
+        });
+          })
 
 }

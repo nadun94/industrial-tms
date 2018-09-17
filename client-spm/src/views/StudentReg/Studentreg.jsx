@@ -27,6 +27,7 @@ class RegStudent extends React.Component {
     this.setMessage = this.setMessage.bind(this);
   }
 
+  // Sets state when a change in a text box occour.
   handleChange({ target }) {
     console.log(target.value);
     this.setState({
@@ -48,6 +49,7 @@ class RegStudent extends React.Component {
   //   console.log(this.state.message);
   // }
 
+//Register a student in to the database. 
   RegisterStudent() {
     console.log("inside Regstd");
     axios
@@ -63,6 +65,7 @@ class RegStudent extends React.Component {
         stat: true
       }).then((res) => {
         console.log(res.data.message);
+        alert(res.data.message);
         this.clearFieldsOnSubmit();
         this.setMessage(res);
         
@@ -72,6 +75,7 @@ class RegStudent extends React.Component {
       
   }
 
+  // Clears the text boxes on the clear button click.
   clearFields(){
     this.setState({
       stdid: "",
@@ -86,6 +90,7 @@ class RegStudent extends React.Component {
     });
   };
 
+  // Set the message comming from data bse to the message state 
   setMessage(res){
     console.log(res.data.message)
     this.setState({
@@ -93,6 +98,7 @@ class RegStudent extends React.Component {
     });
   }
 
+  // clears the text boxes after a student registered.
   clearFieldsOnSubmit(){
     console.log("clear");
     this.setState({
@@ -238,7 +244,7 @@ class RegStudent extends React.Component {
                         }
                       ]}
                     />
-                    <h3>{this.state.message}</h3>
+                    {/* <h3>{this.state.message}</h3> */}
                     <ButtonGroup className="pull-right">
                       <Button onClick = {this.RegisterStudent}>Save</Button>
                       <Button onClick = {this.clearFields}>Clear</Button>
