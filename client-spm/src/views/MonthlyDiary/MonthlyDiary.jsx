@@ -6,7 +6,7 @@ import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "components";
 import userBackground from "assets/img/bg5.jpg";
 import userAvatar from "assets/img/mike.jpg";
 import Button from "components/CustomButton/CustomButton.jsx";
-import { thead, tbody } from "variables/general";
+
 
 class MonthlyDiary extends React.Component {
   state = {
@@ -33,12 +33,12 @@ class MonthlyDiary extends React.Component {
 
   createTable = () => {
     var table = (
-      <tbody>
-        {this.state.records.map((prop, key) => {
+      
+        this.state.records.map((prop, key) => {
           return (
             <tr key={key}>
               {prop.map((prop, key) => {
-                if (key === thead.length - 1)
+                if (key === 4)
                   return (
                     <td key={key} className="text-left">
                       {prop}
@@ -52,8 +52,8 @@ class MonthlyDiary extends React.Component {
               </td>
             </tr>
           );
-        })}
-      </tbody>
+        })
+     
     );
 
     console.log("table");
@@ -116,7 +116,7 @@ class MonthlyDiary extends React.Component {
                     <div className="clearfix" />
 
                     <Table responsive>
-                      <thead className="text-primary">
+                      
                         <tr>
                           <th key="EntryID" className="text-middle">
                             Entry Id
@@ -135,7 +135,7 @@ class MonthlyDiary extends React.Component {
                             Actions
                           </th>
                         </tr>
-                      </thead>
+                      
                       {this.createTable()}
                     </Table>
                   </form>
