@@ -12,16 +12,16 @@ import indexRoutes from "routes/index.jsx";
 const hist = createBrowserHistory();
 
 function checkLogin() {
-  if (sessionStorage.getItem("loging_status")) {
+  if (!sessionStorage.getItem("loging_status")) {
     return (
       <div>
         {/* <Route path="/" component={Dashboard} />
        */}
         {indexRoutes.map((prop, key) => {
           return (
-           <div>
+            <div>
               <Redirect to="/login" />
-            <Route path={prop.path} key={key} component={prop.component} />
+              <Route path={prop.path} key={key} component={prop.component} />
             </div>
           );
         })}
