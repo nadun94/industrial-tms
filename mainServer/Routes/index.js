@@ -32,7 +32,7 @@ db.sequelize = sequelize;
 
    //allocate supervisor
     require('../Controller/AllocateSupervisor/allocateSuperviserController.js')(app, Sequelize, sequelize, db)
-
+    require('../Controller/InternDiary/internalTrainingController')(app, Sequelize, sequelize, db)
 
 
     //Connection to the mysql datatabase
