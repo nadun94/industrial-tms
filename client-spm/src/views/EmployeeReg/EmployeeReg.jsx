@@ -148,7 +148,18 @@ class EmployeeReg extends React.Component {
       learningthings: "",
       externalsupervisername: "",
       dateof: "",
-      message: ""
+      message: "",
+
+      studentID: "",
+      stdname: "",
+      address: "",
+      homephone: "",
+      mobilephone: "",
+      email: "",
+      semester: "",
+      gpa: "",
+      cgpa: ""
+
     });
   };
 

@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         tasks:DataTypes.STRING(),
         learningthings:DataTypes.STRING(),
         externalsupervisername:DataTypes.STRING(),
-        dateof:DataTypes.STRING()
+        dateof:DataTypes.STRING(),
+        StudentId:DataTypes.STRING()
+
 
 
 
