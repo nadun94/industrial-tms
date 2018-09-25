@@ -100,7 +100,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
                     ]
                 }
             }).then(data => {
-
+console.log(data);
                 res.send(JSON.stringify({
                     "record": data
                 }))

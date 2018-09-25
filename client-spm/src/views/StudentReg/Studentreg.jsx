@@ -16,7 +16,8 @@ class RegStudent extends React.Component {
       company: null,
       intern_position: null,
       intern_duration: null,
-      message: null
+      message: null,
+      sstdid: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +26,7 @@ class RegStudent extends React.Component {
     this.clearFields = this.clearFields.bind(this);
     this.clearFieldsOnSubmit = this.clearFieldsOnSubmit.bind(this);
     this.setMessage = this.setMessage.bind(this);
+    this.Search = this.Search.bind(this);
   }
 
   // Sets state when a change in a text box occour.
@@ -49,7 +51,7 @@ class RegStudent extends React.Component {
   //   console.log(this.state.message);
   // }
 
-//Register a student in to the database. 
+  //Register a student in to the database. 
   RegisterStudent() {
     console.log("inside Regstd");
     axios
@@ -68,15 +70,15 @@ class RegStudent extends React.Component {
         alert(res.data.message);
         this.clearFieldsOnSubmit();
         this.setMessage(res);
-        
+
       }).catch((err) => {
         console.log(err);
       });
-      
+
   }
 
   // Clears the text boxes on the clear button click.
-  clearFields(){
+  clearFields() {
     this.setState({
       stdid: "",
       name: "",
@@ -86,20 +88,43 @@ class RegStudent extends React.Component {
       company: "",
       intern_position: "",
       intern_duration: "",
-      message: ""
+      message: "",
+      sstdid: null
     });
   };
 
   // Set the message comming from data bse to the message state 
-  setMessage(res){
+  setMessage(res) {
     console.log(res.data.message)
     this.setState({
-      message:res.data.message
+      message: res.data.message
     });
   }
 
+  // search a given student when student id is given.
+  Search() {
+    alert(this.state.sstdid)
+    axios
+      .get("/getallstddetreg/" + this.state.sstdid).then((res) => {
+        console.log(res.data.record[0]);
+        this.setState({
+          stdid: res.data.record[0].stdid,
+          name: res.data.record[0].name,
+          nic: res.data.record[0].nic,
+          address: res.data.record[0].address,
+          tel: res.data.record[0].tel,
+          company: res.data.record[0].company,
+          intern_position: res.data.record[0].intern_position,
+          intern_duration: res.data.record[0].intern_duration
+        })
+
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+
   // clears the text boxes after a student registered.
-  clearFieldsOnSubmit(){
+  clearFieldsOnSubmit() {
     console.log("clear");
     this.setState({
       stdid: "",
@@ -110,7 +135,7 @@ class RegStudent extends React.Component {
       company: "",
       intern_position: "",
       intern_duration: "",
-       message: ""
+      message: ""
     });
   };
   render() {
@@ -126,6 +151,32 @@ class RegStudent extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <form>
+                    <hr></hr>
+                    <FormInputs
+                      ncols={[
+                        "col-md-5 pr-1"
+                      ]}
+                      proprieties={[
+                        {
+                          label: "Search",
+                          inputProps: {
+                            name: "sstdid",
+                            type: "text",
+                            disabled: false,
+                            placeholder: "Enter Student ID(ITxxxxxxxx)",
+                            value: this.state.sstdid,
+                            onChange: this.handleChange
+                            //defaultValue: ""
+                          }
+                        },
+                      ]}
+                    />
+                    <div><ButtonGroup className="pull-left">
+                      <Button onClick={this.Search}>Search</Button>
+                    </ButtonGroup></div>
+                    <br></br>
+                    <br></br>
+                    <hr></hr>
                     <FormInputs
                       ncols={[
                         "col-md-5 pr-1",
@@ -246,8 +297,8 @@ class RegStudent extends React.Component {
                     />
                     {/* <h3>{this.state.message}</h3> */}
                     <ButtonGroup className="pull-right">
-                      <Button onClick = {this.RegisterStudent}>Save</Button>
-                      <Button onClick = {this.clearFields}>Clear</Button>
+                      <Button onClick={this.RegisterStudent}>Save</Button>
+                      <Button onClick={this.clearFields}>Clear</Button>
                     </ButtonGroup>
                   </form>
                 </CardBody>
