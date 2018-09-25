@@ -6,6 +6,7 @@ import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "components";
 import userBackground from "assets/img/bg5.jpg";
 import userAvatar from "assets/img/mike.jpg";
 import Button from "components/CustomButton/CustomButton.jsx";
+import axios from "axios/index";
 
 
 class MonthlyDiary extends React.Component {
@@ -16,29 +17,121 @@ class MonthlyDiary extends React.Component {
     records: []
   };
 
-  addRecord = event => {
-    var record = [
-      "Not Assigned",
-      this.state.month,
-      this.state.summery,
-      "No Remarks"
-    ];
-    this.state.records.push(record);
-    this.setState({
-      records: this.state.records
-    });
+    constructor(props) {
+        super(props);
+        this.getAllRecords();
+    }
 
-    console.log(this.state.records);
-  };
+    getAllRecords = () =>{
+        var self = this;
+        axios
+            .get('/monthly_diary/1')
+            .then(function (res) {
+                console.log(res);
+                self.addToListArray(res);
+
+                console.log(self.state.records);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+    /**
+     * save monthly record to the database
+     * parameters not accepted
+     */
+    saveRecord = () => {
+        var self = this;
+        axios
+            .post("/monthly_diary", {
+                student_id: "1",
+                month: this.state.month,
+                summery:this.state.summery ,
+                remarks:"No Remarks",
+                status: "no"
+            })
+            .then(function (res) {
+                self.addToList(res);
+
+                console.log(res);
+                console.log(self.state.records);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    addToListArray =(res) => {
+
+        Object.keys(res.data.data).map(key => {
+            var record = [res.data.data[key].recordId, res.data.data[key].month, res.data.data[key].summery, res.data.data[key].remarks
+
+            ];
+            this.state.records.push(record);
+            this.setState({
+                records: this.state.records
+            });
+        });
+        console.log(this.state.records);
+    }
+
+
+    addToList = (res) => {
+
+        var record = [res.data.data.recordId, res.data.data.month, res.data.data.summery, res.data.data.remarks
+
+        ];
+        this.state.records.push(record);
+        this.setState({
+            records: this.state.records
+        });
+
+
+    }
+
+    deleteRecord = (id,e) => {
+        console.log(e);
+
+        var self = this;
+        axios
+            .get('/monthly_diary/delete/'+id)
+            .then(function (res) {
+
+                if(res.data.data==1){
+                    self.state.records=[];
+                    self.getAllRecords();
+                    alert('Data deleted successfully!');
+
+                }
+                console.log(res);
+
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    addRecord = event => {
+        this.saveRecord();
+        console.log(this.state.records);
+    };
+
+
 
   createTable = () => {
+      var index;
     var table = (
       
         this.state.records.map((prop, key) => {
           return (
             <tr key={key}>
               {prop.map((prop, key) => {
-                if (key === 4)
+                  if(key ==0){index=prop;}
+                if (key === 3)
                   return (
                     <td key={key} className="text-left">
                       {prop}
@@ -48,7 +141,7 @@ class MonthlyDiary extends React.Component {
               })}
 
               <td key="action">
-                <Button color="warning">Delete Record</Button>
+                <Button color="warning" onClick={this.deleteRecord.bind(this,index)}>Delete Record</Button>
               </td>
             </tr>
           );
@@ -96,13 +189,12 @@ class MonthlyDiary extends React.Component {
                           }
                         },
                         {
-                          label: "Remarks from supervisor",
+                          label: "Summery",
                           inputProps: {
                             type: "text",
                             placeholder:
-                              "Intern should maintain weekly entries at minium in this area, providing the summery of the task and the task duration.",
+                              "Intern should maintain weekly entries at minimum in this area, providing the summery of the task and the task duration.",
                             name: "summery",
-                            name: "remarks",
                             onChange: this.handleChange
                           }
                         }

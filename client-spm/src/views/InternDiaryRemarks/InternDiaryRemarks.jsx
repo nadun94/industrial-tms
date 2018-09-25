@@ -6,6 +6,7 @@ import { PanelHeader, FormInputs, CardAuthor, CardSocials } from "components";
 import userBackground from "assets/img/bg5.jpg";
 import userAvatar from "assets/img/mike.jpg";
 import Button from "components/CustomButton/CustomButton.jsx";
+import axios from "axios/index";
 
 
 class InternDiaryRemarks extends React.Component {
@@ -14,53 +15,10 @@ class InternDiaryRemarks extends React.Component {
     trainingDesc: "",
     from: "",
     to: "",
-    records: []
+      trainingRecords: [],
+      monthlyRecords: []
   };
 
-  addRecord = event => {
-    var record = [
-      this.state.trainerName,
-      this.state.trainingDesc,
-      this.state.from,
-      this.state.to
-    ];
-    this.state.records.push(record);
-    this.setState({
-      records: this.state.records
-    });
-
-    console.log(this.state.records);
-  };
-
-  createTable = () => {
-    var table = (
-      
-        this.state.records.map((prop, key) => {
-          return (
-            <tr key={key}>
-              {prop.map((prop, key) => {
-                if (key === 4)
-                  return (
-                    <td key={key} className="text-left">
-                      {prop}
-                    </td>
-                  );
-                return <td key={key}>{prop}</td>;
-              })}
-
-              <td key="action">
-                <Button color="warning">Delete Record</Button>
-              </td>
-            </tr>
-          );
-        })
-      
-    );
-
-    console.log("table");
-
-    return table;
-  };
 
   handleChange = event => {
     console.log([event.target.name] + " " + event.target.value);
@@ -104,7 +62,7 @@ class InternDiaryRemarks extends React.Component {
                         </th>
                       </tr>
                     
-                    {this.createTable()}
+                    {this.createTraingTable()}
                   </Table>
 
 
@@ -155,7 +113,7 @@ class InternDiaryRemarks extends React.Component {
                        
                       </tr>
                   
-                     {this.createTable()} 
+                     {this.createDiaryTable()}
                   </Table>
                   
 
