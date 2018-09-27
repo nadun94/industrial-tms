@@ -109,7 +109,7 @@ console.log(data);
 
         // Update details of a student when student id is given.
         app.put('/update', function (req, res) {
-            console.log(res);
+            console.log(req);
             db.stdregdet.update({
                 address: req.body.address,
                 tel: req.body.tel,

@@ -27,6 +27,7 @@ class RegStudent extends React.Component {
     this.clearFieldsOnSubmit = this.clearFieldsOnSubmit.bind(this);
     this.setMessage = this.setMessage.bind(this);
     this.Search = this.Search.bind(this);
+    this.updateDetails = this.updateDetails.bind(this);
   }
 
   // Sets state when a change in a text box occour.
@@ -117,6 +118,31 @@ class RegStudent extends React.Component {
           intern_position: res.data.record[0].intern_position,
           intern_duration: res.data.record[0].intern_duration
         })
+
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // update the selectes student details.
+  updateDetails(){
+    axios
+      .put("/update", {
+        stdid: this.state.stdid,
+        // name: this.state.name,
+        // nic: this.state.nic,
+        address: this.state.address,
+        tel: this.state.tel,
+        company: this.state.company,
+        intrnpos: this.state.intern_position,
+        intrndur: this.state.intern_duration,
+        // stat: true
+      }).then((res) => {
+        // alert(res)
+        console.log(res.data.message);
+        // alert(res.data.message);
+        this.clearFieldsOnSubmit();
+        this.setMessage(res);
 
       }).catch((err) => {
         console.log(err);
@@ -298,6 +324,7 @@ class RegStudent extends React.Component {
                     {/* <h3>{this.state.message}</h3> */}
                     <ButtonGroup className="pull-right">
                       <Button onClick={this.RegisterStudent}>Save</Button>
+                      <Button onClick={this.updateDetails}>Update</Button>
                       <Button onClick={this.clearFields}>Clear</Button>
                     </ButtonGroup>
                   </form>
