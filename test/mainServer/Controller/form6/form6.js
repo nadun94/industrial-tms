@@ -7,7 +7,7 @@ const app = require('../server.js');
 //post test for form 6
 describe('POST /fill-formI6', function () {
 this.timeout(15000);
-let data = {}
+
 it('respond with 201 created', function (done) {
 this.timeout(15000);
 setTimeout(done, 15000);
