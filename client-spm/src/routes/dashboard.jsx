@@ -11,6 +11,7 @@ import DisplayFormI5 from "../views/DisplayFormI5/DisplayFormI5";
 import InternDiary from "../views/InternDiary/InternDiary";
 import MonthDiary from "../views/MonthlyDiary/MonthlyDiary";
 import DiaryRemarks from "../views/InternDiaryRemarks/InternDiaryRemarks";
+import SupervisorEmail from "../views/SupervisorEmail/SupervisorEmail";
 
 var dashRoutes = [
   {
@@ -86,6 +87,13 @@ var dashRoutes = [
         icon: "files_paper",
         component: DiaryRemarks
     },
+    {
+    path: "/SupervisorEmail",
+    name: "SupervisorEmail",
+    icon: "files_paper",
+    component: SupervisorEmail
+},
+
  
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];

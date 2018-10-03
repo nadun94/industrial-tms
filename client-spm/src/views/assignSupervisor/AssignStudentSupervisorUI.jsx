@@ -16,7 +16,16 @@ class AssignStudentSupervisorUI extends React.Component {
             studentName: null,
             supervisorName: null,
             assignId:null,
-            opt1:''
+            StudentEmail:"",
+            semester:"",
+            Mobilephone:"",
+            gpa:"",
+            SupervisorTitle:"",
+            AssignedProject:"",
+            opt1:'',
+            stID:"",
+            supID:"",
+            assID:""
 
 
 
@@ -54,6 +63,61 @@ class AssignStudentSupervisorUI extends React.Component {
     }
 
 
+    SearchSuper(){
+           axios.post("/getsupervisor",{
+
+               supervisorId: this.state.supervisorId,
+                    stat: true
+                }).then((res) => {
+                // console.log(res.data.user.stdname);
+                res.data.user.map((data) => {
+
+                    this.setState({
+
+                        supervisorId:this.state.supervisorId,
+                        supervisorName: this.state.supervisorName,
+                        SupervisorTitle:this.state.SupervisorTitle,
+                        AssignedProject:this.state.AssignedProject
+                    });
+                });
+
+            }).catch((err) => {
+                console.log(err);
+            });
+
+        }
+
+
+    SearchStudent(){
+
+        axios.post("/getstudent",{
+
+            studentId: this.state.studentId,
+            stat: true
+        }).then((res) => {
+            // console.log(res.data.user.stdname);
+            res.data.user.map((data) => {
+
+                this.setState({
+
+                    studentId:this.state.supervisorId,
+                    studentName: this.state.studentName,
+                    StudentEmail:this.state.StudentEmail,
+                    semester:this.state.semester,
+                    Mobilephone:this.state.Mobilephone,
+                    gpa: this.state.gpa,
+                    StudentEmail:this.state.StudentEmail,
+                    semester:this.state.semester
+
+                });
+            });
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    }
+
     onSelectChange(event) {
         this.setState({ studentId: event.target.value });
     }
@@ -61,7 +125,7 @@ class AssignStudentSupervisorUI extends React.Component {
         this.setState({ supervisorId: event.target.value });
     }
 
-//***************************
+//
     componentDidMount(){
 
         var self = this;
@@ -86,7 +150,7 @@ class AssignStudentSupervisorUI extends React.Component {
             })
 
 
-    //    88888888888888888
+    //
         let temp = this.state.student_list.map((item, key) => [
             <option value={item.stdid}>{item.stdid}</option>
         ])
@@ -98,7 +162,7 @@ class AssignStudentSupervisorUI extends React.Component {
         this.setState({ supervisorId: temp2 })
 
 
-    //    88888888888888
+    //
 
 
     }
@@ -129,12 +193,12 @@ class AssignStudentSupervisorUI extends React.Component {
                                                     name="student"
                                                     id="selectStudent"
                                                    // onChange={this.onSelectChange.bind(this)}
-                                                    //value={this.state.studentId}
+                                                    value={this.state.studentId}
                                                 >
                                                     {this.state.studentId}
                                                     </Input>
                                                 <br />
-                                                <Button color="info" size="lg">
+                                                <Button color="info" size="lg" onClick={this.SearchStudent}>
                                                     View Student Details
                                                 </Button>
                                             </FormGroup>
@@ -147,9 +211,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={10}>
                                                     <Input
                                                         type="text"
-                                                        name="empName"
+                                                        name="studentName"
                                                         placeholder=" "
-
+                                                        value={this.state.studentName}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -160,8 +224,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={10}>
                                                     <Input
                                                         type="text"
-                                                        name="empName"
+                                                        name="StudentEmail"
                                                         placeholder=""
+                                                        value={this.state.StudentEmail}
 
                                                     />
                                                 </Col>
@@ -173,9 +238,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={10}>
                                                     <Input
                                                         type="text"
-                                                        name="supervisorName"
+                                                        name="Mobilephone"
                                                         placeholder=""
-
+                                                        value={this.state.Mobilephone}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -186,8 +251,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={10}>
                                                     <Input
                                                         type="text"
-                                                        name="empName"
+                                                        name="semester"
                                                         placeholder=""
+                                                        value={this.state.semester}
 
                                                     />
                                                 </Col>
@@ -199,8 +265,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={10}>
                                                     <Input
                                                         type="text"
-                                                        name="empName"
+                                                        name="gpa"
                                                         placeholder=""
+                                                        value={this.state.gpa}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -229,7 +296,7 @@ class AssignStudentSupervisorUI extends React.Component {
 
                                                 </Input>
                                                 <br />
-                                                <Button color="info" size="lg">
+                                                <Button color="info" size="lg" onClick={this.SearchSuper}>
                                                     View  Supervisor Details
                                                 </Button>
                                             </FormGroup>
@@ -242,9 +309,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         type="text"
-                                                        name="supName"
+                                                        name="supervisorName"
                                                         placeholder=""
-
+                                                        value={this.state.supervisorName}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -255,9 +322,9 @@ class AssignStudentSupervisorUI extends React.Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         type="text"
-                                                        name="supervisorName"
+                                                        name="SupervisorTitle"
                                                         placeholder=""
-
+                                                        value={this.state.SupervisorTitle}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -270,6 +337,7 @@ class AssignStudentSupervisorUI extends React.Component {
                                                         type="text"
                                                         name="supProject"
                                                         placeholder=""
+                                                        value={this.state.AssignedProject}
 
                                                     />
                                                 </Col>
@@ -289,80 +357,60 @@ class AssignStudentSupervisorUI extends React.Component {
                                         <h5 className="title">Assign Supervisor</h5>
                                     </CardHeader>
                                     <CardBody>
-
-
-                                                <Table>
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Assign ID</th>
-                                                        <th>StudentID</th>
-                                                        <th>SupervisorID</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    <tr>
-                                                        <td><FormInputs
-                                                            ncols={["col-md-12 pr-1"]}
-                                                            proprieties={[
-                                                                {
-
-                                                                    inputProps: {
-                                                                        type: "text",
-
-                                                                        name: "assignId",
-
-
-                                                                    }
-                                                                }
-                                                            ]}
-                                                        /></td>
-
-                                                        <td><FormInputs
-                                                            ncols={["col-md-12 pr-1"]}
-                                                            proprieties={[
-                                                                {
-
-                                                                    inputProps: {
-                                                                        type: "text",
-                                                                        placeholder: "",
-                                                                        name: "studentId",
-
-
-                                                                    }
-                                                                }
-                                                            ]}
-                                                        /></td>
-
-                                                        <td><FormInputs
-                                                            ncols={["col-md-12 pr-1"]}
-                                                            proprieties={[
-                                                                {
-
-                                                                    inputProps: {
-                                                                        type: "text",
-                                                                        placeholder: "",
-                                                                        name: "supervisorId",
-
-                                                                    }
-                                                                }
-                                                            ]}
-                                                        /></td>
-
-                                                        </tr>
-                                                    </tbody>
-                                                </Table>
-
-                                                <br />
-                                                <Button color="info" size="lg" onClick={this.addDetails}>
-                                                    Assign Student Supervisor
-                                                </Button>
-
-
-
+                                        <div className="row">
+                                            <div className="col-md-5">
+                                                <FormGroup>
+                                                    <Label for="exampleSelect">
+                                                        Student ID
+                                                    </Label>
+                                                    <Input
+                                                        type="text"
+                                                        name="stID"
+                                                        id="stID"
+                                                        value={this.state.stID}
+                                                        onChange={this.handleattributes}
+                                                    >
+                                                    </Input>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-md-5">
+                                                <FormGroup>
+                                                    <Label for="exampleSelect">
+                                                        Supervisor ID
+                                                    </Label>
+                                                    <Input
+                                                        type="text"
+                                                        name="supID"
+                                                        id="supID"
+                                                        value={this.state.supID}
+                                                        onChange={this.handleattributes}
+                                                    >
+                                                    </Input>
+                                                </FormGroup>
+                                            </div>
+                                            <div className="col-md-5">
+                                                <FormGroup>
+                                                    <Label for="exampleSelect">
+                                                        Assign ID
+                                                    </Label>
+                                                    <Input
+                                                        type="text"
+                                                        name="assID"
+                                                        id="assID"
+                                                        value={this.state.assID}
+                                                        onChange={this.handleattributes}
+                                                    >
+                                                    </Input>
+                                                </FormGroup>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <Button color="info" size="lg" onClick={this.addDetails}>
+                                            Assign Student Supervisor
+                                        </Button>
                                     </CardBody>
                                 </div>
-                        </Card>
+                            </Card>
 
                         </Col>
                     </Row>
