@@ -124,12 +124,14 @@ class TrainingInfo extends React.Component {
 
     createTable = () => {
         var index;
+        var approve;
         var table = (
 
             this.state.records.map((prop, key) => {
                 return (
                     <tr key={key}>
                         {prop.map((prop, key) => {
+                            if(key ==5){approve=prop;}
                             if(key ==0){index=prop;}
                             if (key === 6)
                                 return (
@@ -141,7 +143,10 @@ class TrainingInfo extends React.Component {
                         })}
 
                         <td key="action">
-                            <Button color="warning" onClick={this.deleteRecord.bind(this,index)}>Delete Record</Button>
+                            { approve == "Approved"?
+                                null :<Button color="warning" onClick={this.deleteRecord.bind(this, index)}>Delete Record</Button>
+                            }
+
                         </td>
                     </tr>
                 );

@@ -32,22 +32,23 @@ module.exports = function (app, Sequelize, sequelize, db) {
 
         app.route('/internalTrainingInfo/approve')
         .post((req, res) => {
+            console.log(req.body);
             db.internalTraining.update({
-                approve: req.body.approve,
-                where: {
+                approve: "Approved"},
+                {where: {
                     recordId: req.body.recordId
-                 }
-            }).then(record => {
+                 }}
+            ).then(record => {
 
                 res.send(JSON.stringify({
                     "status": "200",
                     "data": record,
-                    'message': "Successfully created record."
+                    'message': "Successfully approved record."
                 }))
             }).catch( (error) => {
                 res.send(JSON.stringify({
                     "status": "500",
-                    'message': "Error creating record."
+                    'message': "Error approving record."
                 }))
                 console.log(error+"---InternalTrainingInfo/approve")
             })

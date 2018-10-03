@@ -21,15 +21,16 @@ class InternDiaryRemarks extends React.Component {
     constructor(props) {
         super(props);
         this.getAllTrainingRecords();
+        this.getAllMonthlyRecords();
     }
 
-    getAllTrainingRecords = () =>{
+    getAllMonthlyRecords = () =>{
         var self = this;
         axios
-            .get('/internalTrainingInfo/1')
+            .get('/monthly_diary/1')
             .then(function (res) {
                 console.log(res);
-                self.addToListArray(res);
+                self.addToMonthlyListArray(res);
 
                 console.log(self.state.records);
             })
@@ -38,7 +39,38 @@ class InternDiaryRemarks extends React.Component {
             });
     }
 
-    addToListArray =(res) => {
+    addToMonthlyListArray =(res) => {
+
+        Object.keys(res.data.data).map(key => {
+            var record = [res.data.data[key].recordId, res.data.data[key].month, res.data.data[key].summery, res.data.data[key].remarks
+
+            ];
+            this.state.monthlyRecords.push(record);
+            this.setState({
+                monthlyRecords: this.state.monthlyRecords
+            });
+        });
+        console.log(this.state.monthlyRecords);
+    }
+
+
+
+    getAllTrainingRecords = () =>{
+        var self = this;
+        axios
+            .get('/internalTrainingInfo/1')
+            .then(function (res) {
+                console.log(res);
+                self.addToTrainingListArray(res);
+
+                console.log(self.state.records);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    addToTrainingListArray =(res) => {
 
         Object.keys(res.data.data).map(key => {
             var record = [res.data.data[key].recordId, res.data.data[key].trainer, res.data.data[key].description, res.data.data[key].from, res.data.data[key].to, res.data.data[key].approve
@@ -46,7 +78,7 @@ class InternDiaryRemarks extends React.Component {
             ];
             this.state.trainingRecords.push(record);
             this.setState({
-                records: this.state.trainingRecords
+                trainingRecords: this.state.trainingRecords
             });
         });
         console.log(this.state.trainingRecords);
@@ -68,12 +100,18 @@ class InternDiaryRemarks extends React.Component {
     };
 
     createTraingTable = () => {
+        var index;
+        var approve;
+
         var table = (
 
             this.state.trainingRecords.map((prop, key) => {
                 return (
                     <tr key={key}>
                         {prop.map((prop, key) => {
+                            if(key ==5){approve=prop;}
+
+                            if(key ==0){index=prop;}
                             if (key === 4)
                                 return (
                                     <td key={key} className="text-left">
@@ -84,7 +122,10 @@ class InternDiaryRemarks extends React.Component {
                         })}
 
                         <td key="action">
-                            <Button color="warning">Delete Record</Button>
+                            {approve == "Approved" ? null :
+                                <Button color="warning" onClick={this.approveRecord.bind(this, index)}>Approve
+                                    Record</Button>
+                            }
                         </td>
                     </tr>
                 );
@@ -97,13 +138,71 @@ class InternDiaryRemarks extends React.Component {
         return table;
     };
 
+    approveRecord = (id,e) => {
+        console.log(e);
+
+        var self = this;
+        axios
+            .post('/internalTrainingInfo/approve', {
+                recordId: id
+            })
+            .then(function (res) {
+                console.log(res);
+                if(res.data.data==1){
+
+                    self.state.getAllTrainingRecords=[];
+                    self.getAllTrainingRecords();
+                    alert(res.data.message);
+
+                }
+                console.log(res);
+
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+
+
+    deleteRecord = (id,e) => {
+        // console.log(e);
+        //
+        // var self = this;
+        // axios
+        //     .get('/internalTrainingInfo/delete/'+id)
+        //     .then(function (res) {
+        //
+        //         if(res.data.data==1){
+        //             self.state.records=[];
+        //             self.getAllRecords();
+        //             alert('Data deleted successfully!');
+        //
+        //         }
+        //         console.log(res);
+        //
+        //
+        //
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+    }
+
+
+
     createDiaryTable = () => {
+        var index;
         var table = (
 
             this.state.monthlyRecords.map((prop, key) => {
                 return (
                     <tr key={key}>
                         {prop.map((prop, key) => {
+                            if(key ==0){index=prop;}
                             if (key === 4)
                                 return (
                                     <td key={key} className="text-left">
@@ -114,7 +213,8 @@ class InternDiaryRemarks extends React.Component {
                         })}
 
                         <td key="action">
-                            <Button color="warning">Delete Record</Button>
+
+                            <Button color="success">Add Remarks</Button>
                         </td>
                     </tr>
                 );
@@ -149,6 +249,10 @@ class InternDiaryRemarks extends React.Component {
                   <Table responsive>
 
                       <tr>
+                          <th key="trainerName" className="text-middle">
+                              Record
+                          </th>
+
                         <th key="trainerName" className="text-middle">
                           Trainer Name
                         </th>
