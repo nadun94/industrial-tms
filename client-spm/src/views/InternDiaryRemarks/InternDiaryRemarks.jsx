@@ -18,7 +18,114 @@ class InternDiaryRemarks extends React.Component {
       trainingRecords: [],
       monthlyRecords: []
   };
+    constructor(props) {
+        super(props);
+        this.getAllTrainingRecords();
+    }
 
+    getAllTrainingRecords = () =>{
+        var self = this;
+        axios
+            .get('/internalTrainingInfo/1')
+            .then(function (res) {
+                console.log(res);
+                self.addToListArray(res);
+
+                console.log(self.state.records);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    addToListArray =(res) => {
+
+        Object.keys(res.data.data).map(key => {
+            var record = [res.data.data[key].recordId, res.data.data[key].trainer, res.data.data[key].description, res.data.data[key].from, res.data.data[key].to, res.data.data[key].approve
+
+            ];
+            this.state.trainingRecords.push(record);
+            this.setState({
+                records: this.state.trainingRecords
+            });
+        });
+        console.log(this.state.trainingRecords);
+    }
+
+    addRecord = event => {
+        var record = [
+            this.state.trainerName,
+            this.state.trainingDesc,
+            this.state.from,
+            this.state.to
+        ];
+        this.state.records.push(record);
+        this.setState({
+            records: this.state.records
+        });
+
+        console.log(this.state.records);
+    };
+
+    createTraingTable = () => {
+        var table = (
+
+            this.state.trainingRecords.map((prop, key) => {
+                return (
+                    <tr key={key}>
+                        {prop.map((prop, key) => {
+                            if (key === 4)
+                                return (
+                                    <td key={key} className="text-left">
+                                        {prop}
+                                    </td>
+                                );
+                            return <td key={key}>{prop}</td>;
+                        })}
+
+                        <td key="action">
+                            <Button color="warning">Delete Record</Button>
+                        </td>
+                    </tr>
+                );
+            })
+
+        );
+
+        console.log("table");
+
+        return table;
+    };
+
+    createDiaryTable = () => {
+        var table = (
+
+            this.state.monthlyRecords.map((prop, key) => {
+                return (
+                    <tr key={key}>
+                        {prop.map((prop, key) => {
+                            if (key === 4)
+                                return (
+                                    <td key={key} className="text-left">
+                                        {prop}
+                                    </td>
+                                );
+                            return <td key={key}>{prop}</td>;
+                        })}
+
+                        <td key="action">
+                            <Button color="warning">Delete Record</Button>
+                        </td>
+                    </tr>
+                );
+            })
+
+        );
+
+        console.log("table");
+
+        return table;
+    };
 
   handleChange = event => {
     console.log([event.target.name] + " " + event.target.value);
