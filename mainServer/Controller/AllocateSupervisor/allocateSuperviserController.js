@@ -8,17 +8,21 @@ module.exports = function (app, Sequelize, sequelize, db)
     db.assignSupervisor = require('../../Model/assignSupervisor/assignSupervisor')(sequelize, Sequelize)
     sequelize.sync();
 
-
+////
 
     app.route('/getstudent/:para')
         .get((req, res) => {
             //console.log(req.params.para);
             db.studentDetails2.findAll({
+                where:{
+                    studentID:req.params.para
+                }
+
             }).then(data => {
+                console.log(data);
 
                 res.send(JSON.stringify({
-                    "stdid": data.stdid,"name":data.name,"email":data.email,"mobilephone":data.mobilephone,
-                    "semester":data.semester,"gpa":data.gpa,
+                    "data":data
 
                 }))
             })
@@ -27,12 +31,14 @@ module.exports = function (app, Sequelize, sequelize, db)
     app.route('/getsupervisor/:para')
         .get((req, res) => {
             ///console.log(req.params.para);
-            db.supervisorDetails.find({
+            db.supervisorDetails.findAll({
+                where:{
+                    supervisorId:req.params.para
+                }
             }).then(data => {
-
+                console.log(data);
                 res.send(JSON.stringify({
-                    "supervisorId": data.supervisorId, "supervisername": data.supervisername,
-                    "supervisertitle":data.supervisertitle,"assignedProject":data.assignedProject
+                    "data":data
                 }))
             })
         })
@@ -60,7 +66,8 @@ module.exports = function (app, Sequelize, sequelize, db)
                 console.log(data);
 
                 res.send(JSON.stringify({
-                    "supervisorId": data.supervisorId, "supervisername": data.supervisorId
+                    "supervisorId": data.supervisorId
+
                 }))
             })
         })

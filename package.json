@@ -6,12 +6,13 @@
   "scripts": {
     "test-init": "./node_modules/jasmine/bin/jasmine.js init",
     "test": "./node_modules/jasmine/bin/jasmine.js",
-    "start": "./node server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai-react-element": "^1.0.6",
     "express": "^4.16.3",
     "mongodb": "^3.1.4",
     "mongoose": "^5.2.13",
