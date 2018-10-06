@@ -3,6 +3,8 @@ import { Card, CardHeader, CardBody, Row, Col, Button, ButtonGroup } from "react
 
 import { PanelHeader, FormInputs } from "components";
 import axios from "axios";
+//In Reactjs whole programme depend on the states and props.So before we send data to the
+//backend from frontend we have to set null values for all text boxes.
 class EmployeeReg extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ class EmployeeReg extends React.Component {
       llearning: null,
       externalsuperviser: null,
       dateof: null,
+      StudentId:null,
       message: null,
 
       studentID: null,
@@ -35,6 +38,7 @@ class EmployeeReg extends React.Component {
 
 
     };
+    //to work methods correctly in React we have to bind them,if we diidnt bind methods errors will be occur.
     this.searchstudent = this.searchstudent.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,7 +59,8 @@ class EmployeeReg extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
   }
-
+//used this method for searching students.Here I used a post method and send the studentid and
+//return a json file with data and map them in to states to show data in frontend.
   searchstudent() {
     console.log(this.state.studentID);
     console.log("search student");
@@ -87,7 +92,8 @@ class EmployeeReg extends React.Component {
       });
 
   }
-
+//here used a post method to send users data to the db through node backend.And sent data using http request body
+//and got latest ststes of textboxes to send data.
   RegisterEmployee() {
     console.log("inside Regstd");
     axios
@@ -106,6 +112,7 @@ class EmployeeReg extends React.Component {
         learningthings: this.state.learningthings,
         externalsupervisername: this.state.externalsupervisername,
         dateof: this.state.dateof,
+        StudentId:this.state.StudentId,
         stat: true
       }).then((res) => {
         this.setState({
@@ -123,6 +130,7 @@ class EmployeeReg extends React.Component {
           learningthings: "",
           externalsupervisername: "",
           dateof: "",
+          StudentId:"",
           message:res.data.message
         });
 
@@ -131,7 +139,7 @@ class EmployeeReg extends React.Component {
       });
 
   }
-
+//here we set all states of text boxes in to null and called this function to clear button to clear all data.
   clearFields() {
     this.setState({
       empid: "",
@@ -148,6 +156,7 @@ class EmployeeReg extends React.Component {
       learningthings: "",
       externalsupervisername: "",
       dateof: "",
+      StudentId:"",
       message: "",
 
       studentID: "",
@@ -187,10 +196,11 @@ class EmployeeReg extends React.Component {
       learningthings: "",
       externalsupervisername: "",
       dateof: "",
+      StudentId:"",
       message: ""
     });
   };
-
+//this is the render method of react we can return html process and dom.
   render() {
     return (
       <div>
@@ -350,7 +360,8 @@ class EmployeeReg extends React.Component {
                       ncols={[
                         "col-md-5 pr-1",
                         "col-md-3 px-1",
-                        "col-md-4 pl-1"
+                        "col-md-4 pl-1",
+                         "col-md-4 pl-1"
                       ]}
                       proprieties={[
                         {
@@ -364,6 +375,20 @@ class EmployeeReg extends React.Component {
                             value: this.state.empid,
                             onChange: this.handleChange
                           }
+                        
+                        },
+                        {
+                          label: "StudentId",
+                          inputProps: {
+                            name: "StudentId",
+                            type: "text",
+                            // disabled: true,
+                            //defaultValue: "Enter name"
+                            placeholder: "Enter StudentId",
+                            value: this.state.StudentId,
+                            onChange: this.handleChange
+                          }
+                        
                         },
                         {
                           label: "Employee Name",

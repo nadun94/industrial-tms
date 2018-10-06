@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         specialization:DataTypes.STRING(),
         from:DataTypes.STRING(),
         to:DataTypes.STRING(),
-        TrainingParty:DataTypes.INTEGER(),
+        TrainingParty:DataTypes.STRING(),
         description:DataTypes.STRING(),
         fromd:DataTypes.STRING(),
         tod:DataTypes.STRING(),

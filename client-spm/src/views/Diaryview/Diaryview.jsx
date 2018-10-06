@@ -3,15 +3,20 @@ import { Card, CardHeader, CardBody, Row, Col, Button, ButtonGroup } from "react
 
 import { PanelHeader, FormInputs } from "components";
 import axios from "axios";
+
+//used for give null values to the ststes of text boxes.
 class Diaryview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+
             studentid: null,
             empname: null,
             empadress: null,
             contactnumber: null,
             emailadress: null,
+            internshiptitle: null,
+            specialization: null,
             from: null,
             to: null,
             TrainingParty: null,
@@ -43,28 +48,35 @@ class Diaryview extends React.Component {
         event.preventDefault();
     }
 
+//post student id and get data as ajson file and map them in to text boxses using setsates.
     searchstudent() {
         console.log(this.state.studentid);
-        console.log("search student");
         axios
             .post("/internaltrainingsearch", {
 
                 studentid: this.state.studentid,
                 stat: true
+
             }).then((res) => {
                 // console.log(res.data.user.stdname);
+                console.log(res)
                 res.data.user.map((data) => {
-                   
+                    console.log(data.empname);
                     this.setState({
 
                         empname: data.empname,
-                        address: data.address,
-                        homephone: data.homephone,
-                        mobilephone: data.mobilephone,
-                        email: data.email,
-                        semester: data.semester,
-                        gpa: data.gpa,
-                        cgpa: data.cgpa
+                        empadress: data.emailadress,
+                        contactnumber: data.contactnumber,
+                        emailadress: data.emailadress,
+                        internshiptitle: data.internshiptitle,
+                        specialization: data.specialization,
+                        from: data.from,
+                        to: data.to,
+                        TrainingParty: data.TrainingParty,
+                        description: data.description,
+                        fromd: data.fromd,
+                        tod: data.tod,
+
 
                     });
                 });
@@ -75,35 +87,24 @@ class Diaryview extends React.Component {
 
     }
 
-    
+
 
     clearFields() {
         this.setState({
-            empid: "",
+
+            studentid: "",
             empname: "",
             empadress: "",
-            supervisername: "",
-            supervisertitle: "",
-            superviseremail: "",
-            superviserphone: "",
-            startdate: "",
-            enddate: "",
-            hours: "",
-            tasks: "",
-            learningthings: "",
-            externalsupervisername: "",
-            dateof: "",
-            message: "",
-
-            studentID: "",
-            stdname: "",
-            address: "",
-            homephone: "",
-            mobilephone: "",
-            email: "",
-            semester: "",
-            gpa: "",
-            cgpa: ""
+            contactnumber: "",
+            emailadress: "",
+            internshiptitle: "",
+            specialization: "",
+            from: "",
+            to: "",
+            TrainingParty: "",
+            description: "",
+            fromd: "",
+            tod: "",
 
         });
     };
@@ -136,6 +137,7 @@ class Diaryview extends React.Component {
         });
     };
 
+//return html process.
     render() {
         return (
             <div>
@@ -161,30 +163,30 @@ class Diaryview extends React.Component {
                                                 {
                                                     label: "Student Id",
                                                     inputProps: {
-                                                        name: "studentID",
+                                                        name: "studentid",
                                                         type: "text",
                                                         //disabled: true,
                                                         //defaultValue: "Creative Code Inc."
-                                                        value: this.state.studentID,
+                                                        value: this.state.studentid,
                                                         onChange: this.handleChange
                                                     }
                                                 },
                                                 {
-                                                    label: "Student Name",
+                                                    label: "Interns Name",
                                                     inputProps: {
-                                                        name: "stdname",
+                                                        name: "empname",
                                                         type: "text",
                                                         defaultValue: "",
-                                                        value: this.state.stdname,
+                                                        value: this.state.empname,
                                                     }
                                                 },
                                                 {
-                                                    label: "Home phone",
+                                                    label: "Interns Address",
                                                     inputProps: {
-                                                        name: "homephone",
+                                                        name: "empadress",
                                                         type: "text",
                                                         placeholder: "",
-                                                        value: this.state.homephone,
+                                                        value: this.state.empadress,
                                                     }
                                                 }
                                             ]}
@@ -195,21 +197,21 @@ class Diaryview extends React.Component {
                                                 {
                                                     label: "Mobile phone",
                                                     inputProps: {
-                                                        name: "mobilephone",
+                                                        name: "contactnumber",
                                                         type: "text",
                                                         placeholder: "",
                                                         defaultValue: "",
-                                                        value: this.state.mobilephone,
+                                                        value: this.state.contactnumber,
                                                     }
                                                 },
                                                 {
                                                     label: "email",
                                                     inputProps: {
-                                                        name: "email",
+                                                        name: "emailadress",
                                                         type: "text",
                                                         placeholder: "",
                                                         defaultValue: "",
-                                                        value: this.state.email,
+                                                        value: this.state.emailadress,
                                                     }
                                                 }
                                             ]}
@@ -218,14 +220,14 @@ class Diaryview extends React.Component {
                                             ncols={["col-md-12"]}
                                             proprieties={[
                                                 {
-                                                    label: "semester",
+                                                    label: "internshiptitle",
                                                     inputProps: {
-                                                        name: "semester",
+                                                        name: "internshiptitle",
                                                         type: "text",
                                                         placeholder: "",
                                                         defaultValue:
                                                         "",
-                                                        value: this.state.semester,
+                                                        value: this.state.internshiptitle,
                                                     }
                                                 }
                                             ]}
@@ -234,34 +236,71 @@ class Diaryview extends React.Component {
                                             ncols={[
                                                 "col-md-4 pr-1",
                                                 "col-md-4 px-1",
-                                                "col-md-4 pl-1"
+                                                "col-md-4 pl-1",
+                                                 "col-md-4 pl-1",
+                                                  "col-md-4 pl-1",
+                                                   "col-md-4 pl-1"
                                             ]}
                                             proprieties={[
                                                 {
 
-                                                    label: "gpa",
+                                                    label: "specialization",
                                                     inputProps: {
-                                                        name: "gpa",
+                                                        name: "specialization",
                                                         type: "text",
                                                         defaultValue: "",
                                                         placeholder: "",
-                                                        value: this.state.gpa,
+                                                        value: this.state.specialization,
                                                     }
                                                 },
                                                 {
-                                                    label: "cgpa",
+                                                    label: "from",
                                                     inputProps: {
-                                                        name: "cgpa",
+                                                        name: "from",
                                                         type: "text",
                                                         defaultValue: "",
                                                         placeholder: "",
-                                                        value: this.state.cgpa
+                                                        value: this.state.from
                                                     }
                                                 },
                                                 {
-                                                    //label: "",
+                                                    label: "TrainingParty",
                                                     inputProps: {
-
+                                                        name: "TrainingParty",
+                                                        type: "text",
+                                                        defaultValue: "",
+                                                        placeholder: "",
+                                                        value: this.state.TrainingParty
+                                                    }
+                                                },
+                                                {
+                                                    label: "description",
+                                                    inputProps: {
+                                                        name: "description",
+                                                        type: "text",
+                                                        defaultValue: "",
+                                                        placeholder: "",
+                                                        value: this.state.description
+                                                    }
+                                                },
+                                                {
+                                                    label: "fromd",
+                                                    inputProps: {
+                                                        name: "fromd",
+                                                        type: "text",
+                                                        defaultValue: "",
+                                                        placeholder: "",
+                                                        value: this.state.fromd
+                                                    }
+                                                },
+                                                {
+                                                    label: "tod",
+                                                    inputProps: {
+                                                        name: "tod",
+                                                        type: "text",
+                                                        defaultValue: "",
+                                                        placeholder: "",
+                                                        value: this.state.tod
                                                     }
                                                 }
                                             ]}

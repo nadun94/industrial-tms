@@ -2,13 +2,16 @@
 module.exports = function (app, Sequelize, sequelize, db)
 {
 
+//We use controllers according to the MVC architecture to sed data from database to the frontends.
+//Firstly we have to import data base model in to the controler.
 db.stdsuperviserfone = require('../../Model/studentsuperviserf1')(sequelize, Sequelize)
 db.ys = require('../../Model/stdfilli-1')(sequelize, Sequelize)
  sequelize.sync();
 
 
 
-
+//using this bellow method we can fetch data from database.Here I want get data from student table
+//after anter studentid.So I have used post method to add student id and return a json file to the frontend.
 app.route('/studentsearch')
         .post((req, res) => {
 
@@ -63,7 +66,7 @@ app.route('/studentsearch')
 
 
 
-
+//used this post method to send data from front end to backend.
  app.route('/addsuperviserandstudent')
         .post((req, res) => {
         db.stdsuperviserfone.create({
@@ -80,7 +83,8 @@ app.route('/studentsearch')
         tasks:req.body.tasks,
         learningthings:req.body.learningthings,
         externalsupervisername:req.body.externalsupervisername,
-        dateof:req.body.dateof
+        dateof:req.body.dateof,
+        StudentId:req.body.StudentId
             }).then(newemployee => {
 
                 res.send(JSON.stringify({

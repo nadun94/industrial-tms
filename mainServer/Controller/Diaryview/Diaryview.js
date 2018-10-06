@@ -10,14 +10,14 @@ module.exports = function (app, Sequelize, sequelize, db) {
 
             db.internaltraining.count({
                     where: {
-                       studentid: req.body.studentid
+                       studentid:req.body.studentid
                     }
                 })
                 .then(function (count) {
                     if (count === 1) {
                         db.internaltraining.findAll({
                                 where: {
-                                      studentid: req.body.studentid
+                                      studentid:req.body.studentid
                                     
                                 }
                             })

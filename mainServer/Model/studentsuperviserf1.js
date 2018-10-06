@@ -1,8 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
+
+    //We create table name as tbl_superviserandemployer using  stdsuperviserfone object
     const stdsuperviserfone = sequelize.define('tbl_superviserandemployer', {
         empid:{ type:DataTypes.STRING(),
          primaryKey: true
         },
+        //theses are the main atributes in our table.
         empname:DataTypes.STRING(),
         empadress: DataTypes.STRING(),
         supervisername: DataTypes.STRING(),
@@ -26,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-
+//we should return modern obeject to the controler class 
+//to connect this db model with front and and to crete tables
     return  stdsuperviserfone;
 };
