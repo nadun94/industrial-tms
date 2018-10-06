@@ -25,8 +25,15 @@ db.sequelize = sequelize;
 
   //require formI5 controller
   require('./supervisor_formI5_route/supervisor_formI5_route')(app)
+  require('../Controller/Supervisor_form_i5/I5STDSelection')(app, Sequelize, sequelize, db)
 
+    //add companysupervisor
+    require('../Controller/addSupervisors/addSupervisorsController')(app, Sequelize, sequelize, db)
+
+   //allocate supervisor
     require('../Controller/AllocateSupervisor/allocateSuperviserController.js')(app, Sequelize, sequelize, db)
+    require('../Controller/InternDiary/internalTrainingController')(app, Sequelize, sequelize, db)
+
 
     //Connection to the mysql datatabase
     // const Op = Sequelize.Op;
@@ -36,12 +43,15 @@ db.sequelize = sequelize;
   require('../Controller/studentsuperviser/studentsupervisercontrolerf1')(app, Sequelize, sequelize, db)
   require('../Controller/Diaryview/Diaryview')(app, Sequelize, sequelize, db)
 
+  //create studemt first_form 1
 
   require('../Controller/stdfill/stdfilli-1')(app, Sequelize, sequelize, db)
+  require('./form_i6/form_i6_route')(app)
+
 
   //Connection to the Mogodb
   
-mongoose.connect('mongodb://localhost:27017/internship', (err) => {
+mongoose.connect('mongodb://nadun:1qaz2wsx@ds125618.mlab.com:25618/internship', (err) => {
   if (err) {
       console.log('Error connecting to mongodb')
   }

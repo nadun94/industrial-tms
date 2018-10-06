@@ -5,11 +5,11 @@ node_modules/
 client-spm/node_modules
 
 
+
 # testing
 client-spm/coverage
 
 # production
-client-spm/build
 client-spm/dist
 
 # misc
@@ -25,3 +25,4 @@ yarn-error.log*
 
 package-lock.json
 client-spm/src/assets/sass/now-ui-dashboard.css
+.idea/

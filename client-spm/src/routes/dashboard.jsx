@@ -1,13 +1,16 @@
 import Home from "views/Home/Home.jsx";
-import Icons from "views/Icons/Icons.jsx";
-import TableList from "views/TableList/TableList.jsx";
-import UserPage from "views/UserPage/UserPage.jsx";
 import superi5 from "../views/supervisor-i5/Supervisor_i5";
+import stureg from "../views/StudentReg/Studentreg.jsx";
 
-import reg from "../views/Test/Test.jsx";
 import EmployeeReg from "../views/EmployeeReg/EmployeeReg.jsx";
 import Diaryview from "../views/Diaryview/Diaryview.jsx";
 import student_form1 from "../views/stdform1-ys/fillform_1";
+import form6 from "../views/formi-6/form6";
+import AssignStudentSupervisorUI from "../views/assignSupervisor/AssignStudentSupervisorUI.jsx";
+import DisplayFormI5 from "../views/DisplayFormI5/DisplayFormI5";
+import InternDiary from "../views/InternDiary/InternDiary";
+import MonthDiary from "../views/MonthlyDiary/MonthlyDiary";
+import DiaryRemarks from "../views/InternDiaryRemarks/InternDiaryRemarks";
 
 var dashRoutes = [
   {
@@ -17,34 +20,16 @@ var dashRoutes = [
     component: Home
   },
   {
-    path: "/icons",
-    name: "Register Student",
-    icon: "design_image",
-    component: Icons
-  },
-  {
-    path: "/user-page",
-    name: "User file",
-    icon: "users_single-02",
-    component: UserPage
-  },
-  {
-    path: "/extended-tables",
-    name: "Table List",
-    icon: "files_paper",
-    component: TableList
-  },
-  {
     path: "/supervisor-i5",
     name: "Form I5 for Supervisor",
     icon: "files_paper",
     component: superi5
   },
   {
-    path: "/studnent_reg",
-    name: "Registration ****",
-    icon: "files_paper",
-    component: reg
+    path: "/StudentReg",
+    name: "Student Registration",
+    icon: "education_paper",
+    component: stureg
   },
 
   {
@@ -65,6 +50,43 @@ var dashRoutes = [
     icon: "users_single-02",
     component: student_form1
   },
+  {
+    path: "/fill-formI6",
+    name: "form I 6",
+    icon: "users_single-02",
+    component: form6
+  },{
+     path: "/assignsupervisor",
+     name: "Assign Supervisor for Student",
+     icon: "files_paper",
+     component: AssignStudentSupervisorUI
+  },
+
+  {
+     path: "/displayformi5for_external_supervisor",
+     name: "Display form I-5 for External Supervisor",
+     icon: "files_paper",
+     component: DisplayFormI5
+  },
+    {
+        path: "/InternDiary",
+        name: "Intern Diary",
+        icon: "files_paper",
+        component: InternDiary
+    },
+    {
+        path: "/Monthly_Diary",
+        name: "Monthly Diary",
+        icon: "files_paper",
+        component: MonthDiary
+    },
+    {
+        path: "/MonthlyDiary_remarks",
+        name: "Diary Remarks",
+        icon: "files_paper",
+        component: DiaryRemarks
+    },
+ 
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];
 export default dashRoutes;

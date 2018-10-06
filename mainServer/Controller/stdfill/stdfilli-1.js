@@ -7,17 +7,32 @@ module.exports = function (app, Sequelize, sequelize, db) {
     
     app.route('/studentform1')
         .post((req, res) => {
+            
 
             if(req.body.studentID==""||req.body.studentID==undefined){
-                res.status(400).json({message: "student id  is blank"});
-            }else if(req.body.stdname==""||req.body.stdname==undefined){
-                res.status(400).json({message: "name is not found or blank"});
+                res.send(JSON.stringify({
+                    
+                    'message': "student id is null"
+                }))
+            }
+        
+            else if(req.body.stdname==""||req.body.stdname==undefined){
+                res.send(JSON.stringify({
+                    
+                    'message': "student name is null"
+                }))
             }
             else if(req.body.address==""||req.body.address==undefined){
-                res.status(400).json({message: "address is not found or blank"});
+                res.send(JSON.stringify({
+                    
+                    'message': "address is null"
+                }))
             }
             else if(req.body.email==""||req.body.email==undefined){
-                res.status(400).json({message: "address is not found or blank"});
+                res.send(JSON.stringify({
+                    
+                    'message': "email id is null"
+                }))
             }
             else{
             db.stddetable.create({

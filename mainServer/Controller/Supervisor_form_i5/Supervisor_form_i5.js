@@ -38,11 +38,7 @@ var SupervisorFormI5 = function(){
 }
 
 
-// this.searchAllFoods = ()=>{
-    
-//        return (foodModel.find().sort({ createdAt: -1 }));
-         
-// }
+
 }
 
 module.exports= new SupervisorFormI5();

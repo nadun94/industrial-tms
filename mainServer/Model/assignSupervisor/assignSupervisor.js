@@ -5,8 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         studentId:DataTypes.STRING(),
         supervisorId:DataTypes.STRING(),
-        studentName:DataTypes.STRING(),
-        supervisorName:DataTypes.STRING(),
+
 
     });
 
