@@ -8,6 +8,9 @@ import student_form1 from "../views/stdform1-ys/fillform_1";
 import form6 from "../views/formi-6/form6";
 import AssignStudentSupervisorUI from "../views/assignSupervisor/AssignStudentSupervisorUI.jsx";
 import DisplayFormI5 from "../views/DisplayFormI5/DisplayFormI5";
+import InternDiary from "../views/InternDiary/InternDiary";
+import MonthDiary from "../views/MonthlyDiary/MonthlyDiary";
+import DiaryRemarks from "../views/InternDiaryRemarks/InternDiaryRemarks";
 
 var dashRoutes = [
   {
@@ -65,7 +68,24 @@ var dashRoutes = [
      icon: "files_paper",
      component: DisplayFormI5
   },
-
+    {
+        path: "/InternDiary",
+        name: "Intern Diary",
+        icon: "files_paper",
+        component: InternDiary
+    },
+    {
+        path: "/Monthly_Diary",
+        name: "Monthly Diary",
+        icon: "files_paper",
+        component: MonthDiary
+    },
+    {
+        path: "/MonthlyDiary_remarks",
+        name: "Diary Remarks",
+        icon: "files_paper",
+        component: DiaryRemarks
+    },
  
   { redirect: true, path: "/", pathTo: "/home", name: "Dashboard" }
 ];

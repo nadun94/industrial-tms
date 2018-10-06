@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
            },
-           month: DataTypes.DATE(),   
+        student_id: DataTypes.STRING(),
+        month: DataTypes.STRING(),
         summery: DataTypes.STRING(),
         remarks: DataTypes.STRING(),
         status: DataTypes.STRING(),
