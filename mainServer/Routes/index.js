@@ -42,7 +42,8 @@ db.sequelize = sequelize;
 
   //Connection to the Mogodb
   
-  mongoose.connect('mongodb://root:1qaz2wsx@ds249942.mlab.com:49942/internship', (err) => {
+  mongoose.connect('mongodb://nadun:1qaz2wsx@ds125618.mlab.com:25618/internship', (err) => {
+   
     if (err) {
         console.log('Error connecting to mongodb')
     }

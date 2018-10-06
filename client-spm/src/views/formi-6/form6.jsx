@@ -77,11 +77,11 @@ class fillform_1 extends React.Component {
         
             
         
-            glossary:[{
+      
                 abbreviation:" ",
                 
-                description:""
-            }],
+                description:"",
+          
            
         
             objectives:"",
@@ -176,6 +176,7 @@ class fillform_1 extends React.Component {
                console.log(res.message);
                console.log(this.state.message);
                 console.log("saved!");
+                alert(this.state.message);
 
                // this.clear()
                
@@ -203,7 +204,7 @@ class fillform_1 extends React.Component {
             <Col md={8} xs={12}>
               <Card>
                 <CardHeader>
-                  <h5 className="title">--INTERNSHIP REPORT-- </h5>
+                  <h5 className="title">INTERNSHIP REPORT </h5>
                 </CardHeader>
                 <CardBody>
                   <form>
@@ -212,7 +213,11 @@ class fillform_1 extends React.Component {
                       ncols={[
                         "col-md-5 pr-1",
                         "col-md-3 px-1",
-                        "col-md-4 pl-1"
+                        "col-md-4 pl-1",
+                        
+
+                        
+
                       ]}
                       proprieties={[
                         {
@@ -256,7 +261,7 @@ class fillform_1 extends React.Component {
                   
                     <FormInputs
                 
-                      ncols={["col-md-6 pr-1", "col-md-6 pl-1"]}
+                      ncols={["col-md-6 pr-1", "col-md-6 pl-1", "col-md-6 pl-1"]}
                       proprieties={[
                         {
                           label: "about project over view",
@@ -314,7 +319,12 @@ class fillform_1 extends React.Component {
                       ncols={[
                         "col-md-4 pr-1",
                         "col-md-4 px-1",
+                        "col-md-4 pl-1",
+                        "col-md-4 pr-1",
+                        "col-md-4 px-1",
+                        "col-md-4 pl-1",
                         "col-md-4 pl-1"
+
                       ]}
                       proprieties={[
                         {
@@ -402,7 +412,7 @@ class fillform_1 extends React.Component {
                      <Button color="secondary" size="lg" onClick={this.clear}  >CLEAR</Button>
                      </ButtonGroup>
                     
-                     <h3> <Badge color="secondary">{this.state.message}</Badge></h3>
+                     <h3> <Badge color="secondary"></Badge></h3>
                       
                
                     

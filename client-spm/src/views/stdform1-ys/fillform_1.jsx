@@ -96,9 +96,10 @@ class fillform_1 extends React.Component {
               //  console.log(res);
                // console.log(res.data);
                //console.log(this.checkerror());
-               console.log(res.message);
+               console.log(res.data.message);
                console.log(this.state.message);
-                console.log("saved!");
+              console.log("saved!");
+              alert(this.state.message);
 
                // this.clear()
                
@@ -184,7 +185,7 @@ class fillform_1 extends React.Component {
                         {
                           label: "home phone number",
                           inputProps: {
-                            type: "text",
+                            type: "number",
                             placeholder: "home phone number",
                             defaultValue: "",
                             name:"homephone",
@@ -195,7 +196,7 @@ class fillform_1 extends React.Component {
                         {
                           label: "mobile number",
                           inputProps: {
-                            type: "text",
+                            type: "number",
                             placeholder: "mobile number",
                             defaultValue: "",
                             name:"mobilephone",
@@ -232,7 +233,7 @@ class fillform_1 extends React.Component {
                         {
                           label: "semester",
                           inputProps: {
-                            type: "text",
+                            type:"number",
                           //  defaultValue: "year",
                             placeholder: "semester",
                             name:"semester",
@@ -243,7 +244,7 @@ class fillform_1 extends React.Component {
                         {
                           label: "gpa",
                           inputProps: {
-                            type: "text",
+                            type:"number",
                            // defaultValue: "",
                             placeholder: "gpa",
                             name:"gpa",
@@ -254,7 +255,7 @@ class fillform_1 extends React.Component {
                         {
                           label: "cgpa",
                           inputProps: {
-                            type: "text",
+                            type:"number",
                             placeholder: "cgpa",
                             name:"cgpa",
                             value:this.state.cgpa,
@@ -274,7 +275,7 @@ class fillform_1 extends React.Component {
                      <Button color="secondary" size="lg" onClick={this.clear}  >CLEAR</Button>
                      </ButtonGroup>
                     
-                     <h3> <Badge color="secondary">{this.state.message}</Badge></h3>
+                     <h3> <Badge color="secondary"></Badge></h3>
                       
                
                     
