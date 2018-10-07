@@ -333,8 +333,8 @@ class EmployeeReg extends React.Component {
                     />
                     <h3>{this.state.message}</h3>
                     <ButtonGroup className="pull-right">
-                      <Button onClick={this.searchstudent}>Search</Button>
-                      <Button onClick={this.clearFields}>Clear</Button>
+                      <Button color="info" size="lg" onClick={this.searchstudent}>Search</Button>
+                      <Button  color="info" size="lg" onClick={this.clearFields}>Clear</Button>
                     </ButtonGroup>
                   </form>
 
@@ -576,8 +576,8 @@ class EmployeeReg extends React.Component {
                     />
                     <h3>{this.state.message}</h3>
                     <ButtonGroup className="pull-right">
-                      <Button onClick={this.RegisterEmployee}>Save</Button>
-                      <Button onClick={this.clearFields}>Clear</Button>
+                      <Button color="info" size="lg" onClick={this.RegisterEmployee}>Save</Button>
+                      <Button color="info" size="lg" onClick={this.clearFields}>Clear</Button>
                     </ButtonGroup>
                   </form>
                 </CardBody>
