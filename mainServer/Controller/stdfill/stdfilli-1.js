@@ -4,7 +4,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
     db.stddetable = require('../../Model/stdfilli-1')(sequelize, Sequelize)
     sequelize.sync();
 
-    
+    //create routes
     app.route('/studentform1')
         .post((req, res) => {
             

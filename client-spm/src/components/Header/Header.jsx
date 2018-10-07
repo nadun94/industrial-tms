@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -30,6 +30,7 @@ class Header extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
+    this.Logout= this.Logout.bind();
   }
   toggle() {
     if (this.state.isOpen) {
@@ -49,6 +50,10 @@ class Header extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+  Logout(){
+    sessionStorage.clear();
+        window.location.reload();
   }
   getBrand() {
     var name;
@@ -142,54 +147,61 @@ class Header extends React.Component {
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
           </NavbarToggler>
+          
           <Collapse
             isOpen={this.state.isOpen}
             navbar
             className="justify-content-end"
-          >
+          > 
             <form>
-              <InputGroup className="no-border">
+              {/* <InputGroup className="no-border">
                 <Input placeholder="Search..." />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <i className="now-ui-icons ui-1_zoom-bold" />
                   </InputGroupText>
                 </InputGroupAddon>
-              </InputGroup>
+              </InputGroup> */}
+              <h7>Hi {sessionStorage.getItem("user")}</h7>  
             </form>
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <Link to="#pablo" className="nav-link">
                   <i className="now-ui-icons media-2_sound-wave" />
                   <p>
                     <span className="d-lg-none d-md-block">Stats</span>
                   </p>
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <Dropdown
                 nav
                 isOpen={this.state.dropdownOpen}
                 toggle={e => this.dropdownToggle(e)}
               >
-                <DropdownToggle caret nav>
+              <br/>
+              <br/>
+              <br/>
+              <h7 onClick={this.Logout}>Logout</h7>
+                {/* <DropdownToggle caret nav>
                   <i className="now-ui-icons location_world" />
                   <p>
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
-                </DropdownToggle>
-                <DropdownMenu right>
+                </DropdownToggle> */}
+                {/* <DropdownMenu right>
                   <DropdownItem tag="a">Action</DropdownItem>
                   <DropdownItem tag="a">Another Action</DropdownItem>
                   <DropdownItem tag="a">Something else here</DropdownItem>
-                </DropdownMenu>
+                </DropdownMenu> */}
               </Dropdown>
               <NavItem>
-                <Link to="#pablo" className="nav-link">
+               
+                {/* <Link to="#pablo" className="nav-link">
                   <i className="now-ui-icons users_single-02" />
                   <p>
                     <span className="d-lg-none d-md-block">Account</span>
                   </p>
-                </Link>
+                </Link> */}
               </NavItem>
             </Nav>
           </Collapse>

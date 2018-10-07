@@ -271,8 +271,8 @@ class fillform_1 extends React.Component {
                       
                     />
                     <ButtonGroup className="pull-right">
-                     <Button color="primary" size="lg"  onClick={this.addDetails} >SAVE</Button>{' '}
-                     <Button color="secondary" size="lg" onClick={this.clear}  >CLEAR</Button>
+                     <Button color="info" size="lg"  onClick={this.addDetails} >SAVE</Button>{' '}
+                     <Button color="info" size="lg" onClick={this.clear}  >CLEAR</Button>
                      </ButtonGroup>
                     
                      <h3> <Badge color="secondary"></Badge></h3>

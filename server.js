@@ -13,8 +13,9 @@ require('./mainServer/Routes/index')(app)
 
 
 app.use('*', express.static(path.join(__dirname, 'client-spm/build')));
-app.listen(config.PORT,() => {
-    console.log('Server started on port 4000');
+const port =  process.env.PORT || 5000;
+app.listen(port,() => {
+    console.log('Server started on port 5000');
 });
 
 

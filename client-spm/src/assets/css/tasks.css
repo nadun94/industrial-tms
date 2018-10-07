@@ -148,3 +148,7 @@ float: right;
       margin:15px;
       width: 100%;
   }
+  #slide{
+      height: 700px;
+      padding: 10px;
+  }

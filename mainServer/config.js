@@ -2,11 +2,11 @@ module.exports = {
     PORT: 4000,
     mysql: {
         options: {
-            username: 'root',
+            username: 'Muvi@csse-project',
             port: 3306,
-            password: '7517',
-            database: 'itmsdb',
-            host: 'localhost',
+            password: 'Tharanga@11',
+            database: 'spm_db',
+            host: 'csse-project.mysql.database.azure.com',
             dialect: 'mysql',
            
         }

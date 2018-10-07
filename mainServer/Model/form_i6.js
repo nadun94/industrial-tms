@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
-
+//create form i6 schema
 const Form_i6_fill = new schema({
 
     studentID: {type: String,required: true,unique: true},

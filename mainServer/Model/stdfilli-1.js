@@ -1,4 +1,4 @@
-
+//create student form modules
 module.exports = (sequelize, DataTypes) => {
     const stdfilli1 = sequelize.define('stdfilli1', {
         studentID:{ type:DataTypes.STRING(50),
