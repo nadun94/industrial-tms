@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         trainer: DataTypes.STRING(),
         description: DataTypes.STRING(),
         from: DataTypes.STRING(),
-        to: DataTypes.INTEGER(),
+        to: DataTypes.STRING(),
         approve: DataTypes.STRING(),
         
     });

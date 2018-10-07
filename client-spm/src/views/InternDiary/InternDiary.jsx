@@ -23,7 +23,10 @@ class TrainingInfo extends React.Component {
         this.getAllRecords();
     }
 
-
+    /**
+     * get all training record from the database
+     * parameters not accepted
+     */
     getAllRecords = () =>{
         var self = this;
         axios
@@ -49,7 +52,7 @@ class TrainingInfo extends React.Component {
             .post("/internalTrainingInfo", {
                 student_id: "1",
                 trainer: this.state.trainerName,
-                description: this.state.trainerName,
+                description: this.state.trainingDesc,
                 from: this.state.from,
                 to: this.state.to,
                 approve: "Not Approved"
@@ -64,6 +67,11 @@ class TrainingInfo extends React.Component {
                 console.log(error);
             });
     }
+
+    /**
+     * add training records to state array
+     * parameters response from the server
+     */
 
     addToListArray =(res) => {
 
@@ -93,6 +101,11 @@ class TrainingInfo extends React.Component {
 
     }
 
+
+    /**
+     * delete training record from the database
+     * parameters record id
+     */
     deleteRecord = (id,e) => {
         console.log(e);
 
@@ -122,6 +135,11 @@ class TrainingInfo extends React.Component {
         console.log(this.state.records);
     };
 
+
+    /**
+     * create training records table with response array data
+     * parameters not accepted
+     */
     createTable = () => {
         var index;
         var approve;
@@ -159,6 +177,10 @@ class TrainingInfo extends React.Component {
         return table;
     };
 
+    /**
+     * handle event changes update states
+     * parameters event
+     */
     handleChange = event => {
         console.log([event.target.name] + " " + event.target.value);
 
@@ -171,7 +193,7 @@ class TrainingInfo extends React.Component {
                 <PanelHeader size="sm"/>
                 <div className="content">
                     <Row>
-                        <Col md={10} xs={12}>
+                        <Col md={11} xs={12}>
                             <Card>
                                 <CardHeader>
                                     <h5 className="title">Internal Training Information</h5>
@@ -225,6 +247,7 @@ class TrainingInfo extends React.Component {
                                     <Button color="success" onClick={this.addRecord}>
                                         Add Record
                                     </Button>
+                                    <br/><br/><br/>
                                     <Table responsive>
 
                                         <tr>

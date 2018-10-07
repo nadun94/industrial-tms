@@ -70,7 +70,7 @@ var dashRoutes = [
   },
     {
         path: "/InternDiary",
-        name: "Intern Diary",
+        name: "Internal Training",
         icon: "files_paper",
         component: InternDiary
     },

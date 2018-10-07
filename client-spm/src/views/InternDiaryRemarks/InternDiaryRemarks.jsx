@@ -11,6 +11,10 @@ import axios from "axios/index";
 
 class InternDiaryRemarks extends React.Component {
   state = {
+      id:"",
+      month:"",
+      edit:false,
+      remarks:"",
     trainerName: "",
     trainingDesc: "",
     from: "",
@@ -24,6 +28,64 @@ class InternDiaryRemarks extends React.Component {
         this.getAllMonthlyRecords();
     }
 
+    cancelRemarks = () => {
+        this.setState({
+            edit: false
+        });
+    }
+
+
+    /**
+     * Add updated remarks to the database
+     * parameters event
+     */
+    addRemarks = () => {
+
+
+        var self = this;
+        axios
+            .post('/monthly_diary/remarksAdd', {
+                recordId: this.state.id,
+                remarks: this.state.remarks
+            })
+            .then(function (res) {
+                console.log(res);
+                if(res.data.data==1){
+
+                    self.state.monthlyRecords=[];
+                    self.getAllMonthlyRecords();
+                    alert(res.data.message);
+                    self.state.edit=false;
+                }
+                console.log(res);
+
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    /**
+     * enable adding remarks
+     * parameters record id,month
+     */
+    enableRemarks = (id,month,e) => {
+      //  console.log(id+" "+month);
+
+        this.setState({
+            id: id,
+            month: month,
+            edit:true
+        });
+
+    }
+
+    /**
+     * get all diary records from the database
+     * parameters event
+     */
     getAllMonthlyRecords = () =>{
         var self = this;
         axios
@@ -39,6 +101,10 @@ class InternDiaryRemarks extends React.Component {
             });
     }
 
+    /**
+     * add server response to the state array
+     * parameters response from the server
+     */
     addToMonthlyListArray =(res) => {
 
         Object.keys(res.data.data).map(key => {
@@ -53,8 +119,10 @@ class InternDiaryRemarks extends React.Component {
         console.log(this.state.monthlyRecords);
     }
 
-
-
+    /**
+     * get all training records from the database
+     * parameters none
+     */
     getAllTrainingRecords = () =>{
         var self = this;
         axios
@@ -70,6 +138,10 @@ class InternDiaryRemarks extends React.Component {
             });
     }
 
+    /**
+     * add server response array to state array
+     * parameters server response
+     */
     addToTrainingListArray =(res) => {
 
         Object.keys(res.data.data).map(key => {
@@ -84,21 +156,42 @@ class InternDiaryRemarks extends React.Component {
         console.log(this.state.trainingRecords);
     }
 
-    addRecord = event => {
-        var record = [
-            this.state.trainerName,
-            this.state.trainingDesc,
-            this.state.from,
-            this.state.to
-        ];
-        this.state.records.push(record);
-        this.setState({
-            records: this.state.records
-        });
 
-        console.log(this.state.records);
-    };
+    /**
+     * update approve status of a record
+     * parameters record id ,event
+     */
+    approveRecord = (id,e) => {
+        console.log(e);
 
+        var self = this;
+        axios
+            .post('/internalTrainingInfo/approve', {
+                recordId: id
+            })
+            .then(function (res) {
+                console.log(res);
+                if(res.data.data==1){
+
+                    self.state.trainingRecords=[];
+                    self.getAllTrainingRecords();
+                    alert(res.data.message);
+
+                }
+                console.log(res);
+
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    /**
+     * create html table with state array data
+     * parameters none
+     */
     createTraingTable = () => {
         var index;
         var approve;
@@ -138,64 +231,13 @@ class InternDiaryRemarks extends React.Component {
         return table;
     };
 
-    approveRecord = (id,e) => {
-        console.log(e);
-
-        var self = this;
-        axios
-            .post('/internalTrainingInfo/approve', {
-                recordId: id
-            })
-            .then(function (res) {
-                console.log(res);
-                if(res.data.data==1){
-
-                    self.state.getAllTrainingRecords=[];
-                    self.getAllTrainingRecords();
-                    alert(res.data.message);
-
-                }
-                console.log(res);
-
-
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-
-
-
-    deleteRecord = (id,e) => {
-        // console.log(e);
-        //
-        // var self = this;
-        // axios
-        //     .get('/internalTrainingInfo/delete/'+id)
-        //     .then(function (res) {
-        //
-        //         if(res.data.data==1){
-        //             self.state.records=[];
-        //             self.getAllRecords();
-        //             alert('Data deleted successfully!');
-        //
-        //         }
-        //         console.log(res);
-        //
-        //
-        //
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-    }
-
-
-
+    /**
+     * create html table with state array data
+     * parameters none
+     */
     createDiaryTable = () => {
         var index;
+        var month;
         var table = (
 
             this.state.monthlyRecords.map((prop, key) => {
@@ -203,6 +245,7 @@ class InternDiaryRemarks extends React.Component {
                     <tr key={key}>
                         {prop.map((prop, key) => {
                             if(key ==0){index=prop;}
+                            if(key ==1){month=prop;}
                             if (key === 4)
                                 return (
                                     <td key={key} className="text-left">
@@ -214,7 +257,7 @@ class InternDiaryRemarks extends React.Component {
 
                         <td key="action">
 
-                            <Button color="success">Add Remarks</Button>
+                            <Button color="success" onClick={this.enableRemarks.bind(this, index,month)}>Add Remarks</Button>
                         </td>
                     </tr>
                 );
@@ -283,23 +326,54 @@ class InternDiaryRemarks extends React.Component {
                         Summery of the key tasks completed for the month of [Month/Year]
                       </h5>
 
+                    { this.state.edit == true?
+                        <FormInputs
+                            ncols={["col-md-2 pr-1", "col-md-3 pr-1", "col-md-6 pr-1"]}
+                            proprieties={[
+                                {
+                                    label: "Entry ID",
+                                    inputProps: {
+                                        type: "text",
+                                        value: this.state.id,
+                                        name: "id",
+                                        disabled: true
+                                    }
+                                },
+                                {
+                                    label: "Month",
+                                    inputProps: {
+                                        type: "text",
+                                        name: "month",
+                                        value: this.state.month,
+                                        disabled: true
+                                    }
+                                },
+                                {
+                                    label: "Remarks from supervisor",
+                                    inputProps: {
+                                        type: "text",
+                                        name: "remarks",
+                                        onChange: this.handleChange
+                                    }
+                                }
 
-                     <FormInputs
-                    ncols={["col-md-6 pr-1"]}
-                    proprieties={[
-                      {
-                        label: "Remarks from supervisor",
-                        inputProps: {
-                          type: "text",
+                            ]}
 
-                          name: "remarks",
-                          onChange: this.handleChange
-                        }
-                      }
-                    ]}
-                  />
+                        />:null
+                    }
+                    { this.state.edit == true?
+                    < Button color="success"onClick={this.addRemarks}>Add Remarks</Button>
 
-                     <Button color="success" pullRight onClick={this.addRecord}>Add Remarks</Button>
+                    : null
+                    }
+
+                    {
+                        this.state.edit == true?
+                    < Button color="warning"onClick={this.cancelRemarks}>Cancel</Button>
+
+                    : null
+                    }
+                    <br/><br/><br/>
                      <div className="clearfix" />
                      <div className="clearfix" />
 

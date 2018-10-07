@@ -32,7 +32,7 @@ module.exports = function (app, Sequelize, sequelize, db) {
 
         app.route('/internalTrainingInfo/approve')
         .post((req, res) => {
-            console.log(req.body);
+            //console.log(req.body);
             db.internalTraining.update({
                 approve: "Approved"},
                 {where: {
@@ -156,6 +156,31 @@ module.exports = function (app, Sequelize, sequelize, db) {
                     'message': "Error searching record."
                 }))
                 console.log(error+"---InternalTrainingInfo[get]")
+            })
+        });
+
+    app.route('/monthly_diary/remarksAdd')
+        .post((req, res) => {
+            //console.log(req.body);
+            db.monthlyDiary.update({
+                    status:"approved" ,remarks:req.body.remarks},
+                {where: {
+                        recordId: req.body.recordId,
+
+                    }}
+            ).then(record => {
+
+                res.send(JSON.stringify({
+                    "status": "200",
+                    "data": record,
+                    'message': "Remarks added successfully."
+                }))
+            }).catch( (error) => {
+                res.send(JSON.stringify({
+                    "status": "500",
+                    'message': "Error adding remarks."
+                }))
+                console.log(error+"---InternalTrainingInfo/approve")
             })
         });
 }

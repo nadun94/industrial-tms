@@ -22,6 +22,10 @@ class MonthlyDiary extends React.Component {
         this.getAllRecords();
     }
 
+    /**
+     * get all monthly records from the databse
+     * parameters none
+     */
     getAllRecords = () =>{
         var self = this;
         axios
@@ -63,6 +67,10 @@ class MonthlyDiary extends React.Component {
             });
     }
 
+    /**
+     * add server response to state array
+     * parameters server response
+     */
     addToListArray =(res) => {
 
         Object.keys(res.data.data).map(key => {
@@ -91,6 +99,10 @@ class MonthlyDiary extends React.Component {
 
     }
 
+    /**
+     * delete monthly record from the db
+     * parameters record id, event
+     */
     deleteRecord = (id,e) => {
         console.log(e);
 
@@ -121,7 +133,10 @@ class MonthlyDiary extends React.Component {
     };
 
 
-
+    /**
+     * create html table with state array data
+     * parameters none
+     */
   createTable = () => {
       var index;
     var table = (
@@ -204,6 +219,7 @@ class MonthlyDiary extends React.Component {
                     <Button color="success" pullRight onClick={this.addRecord}>
                       Add Record
                     </Button>
+                      <br/><br/><br/>
                     <div className="clearfix" />
                     <div className="clearfix" />
 
