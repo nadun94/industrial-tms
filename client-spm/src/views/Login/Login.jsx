@@ -33,6 +33,7 @@ export default class Login extends Component {
         password: this.state.password
       })
       .then(function(res) {
+        console.log(res.data.message)
         if (res.data.auth === true) {
           self.setState({ loading: false });
           self.setState({ message: res.data.message });
@@ -41,6 +42,7 @@ export default class Login extends Component {
           self.setState({ show_error_login: false });
           window.location.reload();
         } else {
+          alert(res.data.message)
           self.setState({ loading: false });
           self.setState({ show_error_login: true });
         }
